@@ -18,20 +18,29 @@ class ReviewController extends Controller
                  ->join('users', 'users.id', '=', 'reviews.user_id')
                  ->join('items', 'items.id', '=', 'reviews.item_id')
                  ->select('reviews.*', 'users.name as user_name', 'items.name as item_name')
-                 ->get();
+                 ->paginate(10);
         return view('review/index', ['reviews' => $reviews]);
     }
     public function create()
     {
         //新規登録用のクラスをViewに渡す
         $review = new Review();
-        return view('review/create',compact('review'));
+        $item_names = DB::table('items')
+                    ->select('items.name')
+                    ->get();
+        return view('review/create',
+                    compact('review','item_names'));
     }
     public function store(Request $request)
     {
         $review = new review();
         $review->user_id = $request->user_id;
-        $review->item_id = $request->item_id;
+        // item_nameを元にitem_idを持ってくる
+        $item_id = DB::table('items')
+                    ->select('items.id')
+                    ->where('name','=',$request->item_name)
+                    ->get();
+        $review->item_id = $item_id[0]->id;
         $review->evaluation = $request->evaluation;
         $review->title = $request->title;
         $review->content = $request->content;

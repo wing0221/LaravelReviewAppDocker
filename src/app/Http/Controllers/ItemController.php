@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Item;
@@ -7,6 +9,7 @@ use App\Http\Requests\ItemRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
 {
@@ -15,8 +18,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::all();
-        return view('item/index', compact('items'));
+        return view('item/index', [
+            'items' => DB::table('items')->paginate(10)
+        ]);
     }
 
     /**
@@ -25,7 +29,10 @@ class ItemController extends Controller
     public function create()
     {
         $item = new Item();
-        return view('item/create',compact('item'));
+        // return view('item/create',compact('item'));
+        return view('item/create',[
+            ['item' => $item]
+        ]);
     }
 
     /**
@@ -58,9 +65,8 @@ class ItemController extends Controller
     {
         // DBよりURIパラメータと同じIDを持つItemの情報を取得
         $item = Item::findOrFail($id);
-
         // 取得した値をビュー「book/edit」に渡す
-        return view('item/edit', compact('item'));
+        return view('item/edit', ['item' => $item]);
     }
 
     /**

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 //TopPageのルーティング
 Route::get('/', function () {
     return view('index');
-});
+})->name('root');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

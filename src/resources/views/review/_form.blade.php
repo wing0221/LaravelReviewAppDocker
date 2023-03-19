@@ -16,18 +16,20 @@
             <form action="/review/{{ $review->id }}" method="post">
                 <input type="hidden" name="_method" value="PUT">
             @endif
-            {{-- TODO 画像アップロード可能にする --}}
             {{-- TODO 確認画面を追加 --}}
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 {{-- TODO ログインUserのIDを自動入力し、hiddenで送信 --}}
-                {{-- TODO リストから選択させる --}}
                 <div class="form-group">
                     <label for="item_id">ユーザー</label>
                     <input type="text" class="form-control" name="user_id" value="{{ $review->user_id }}">
                 </div>
                 <div class="form-group">
-                    <label for="item_id">レビュー品</label>
-                    <input type="text" class="form-control" name="item_id" value="{{ $review->item_id }}">
+                    <label for="item-id">レビュー品</label>
+                    <select class="form-control"  name="item_name">
+                        @foreach ($item_names as $item_name)
+                            <option>{{ $item_name->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 {{-- TODO 五つ星を押して入力するやつにする --}}
                 <div class="form-group">

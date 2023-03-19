@@ -1,7 +1,7 @@
 <div class="container ops-main">
     <div class="row">
         <div class="col-md-6">
-            <h2>レビュー品登録</h2>
+            <h3 class="text-3xl font-bold text-yellow-500">レビュー品登録</h3>
         </div>
     </div>
     <div class="row">
@@ -20,20 +20,28 @@
             {{-- TODO 確認画面を追加 --}}
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
+                    <label for="image">ユーザー</label>
+                    <input type="text" class="form-control" name="image" value="{{ $item->image }}">
+                </div>
+                <div class="form-group">
                     <label for="image">サムネイル</label>
                     <input type="text" class="form-control" name="image" value="{{ $item->image }}">
                 </div>
                 <div class="form-group">
-                    <label for="name">名称</label>
-                    <input type="text" class="form-control" name="name" value="{{ $item->name }}">
+                    <label for="image">レビュー品/label>
+                    <input type="text" class="form-control" name="image" value="{{ $item->image }}">
                 </div>
                 <div class="form-group">
-                    <label for="maker">メーカー</label>
-                    <input type="text" class="form-control" name="maker" value="{{ $item->maker }}">
+                    <label for="image">評価</label>
+                    <input type="text" class="form-control" name="image" value="{{ $item->image }}">
                 </div>
                 <div class="form-group">
-                    <label for="content">詳細</label>
-                    <input type="text" class="form-control" name="content" value="{{ $item->content }}">
+                    <label for="image">タイトル</label>
+                    <input type="text" class="form-control" name="image" value="{{ $item->image }}">
+                </div>
+                <div class="form-group">
+                    <label for="image">詳細</label>
+                    <input type="text" class="form-control" name="image" value="{{ $item->image }}">
                 </div>
                 <button type="submit" class="btn btn-default">登録</button>
                 <a href="/item">戻る</a>
