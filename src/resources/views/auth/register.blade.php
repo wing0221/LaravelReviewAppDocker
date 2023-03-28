@@ -8,7 +8,7 @@
       <div class="row">
         <div class="row">
             <div class="col-md-12 center login-header">
-                <h2>ユーザー登録/h2>
+                <h2>ユーザー登録</h2>
             </div>
             <!--/span-->
         </div><!--/row-->

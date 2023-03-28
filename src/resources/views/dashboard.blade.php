@@ -4,13 +4,23 @@
 @include('layouts/_topbar')
 <div class="ch-container">
   <div class="row">
-      @include('layouts/_noscript')
+    @include('layouts/_left_menu_mypage') 
+    @include('layouts/_noscript')
+    <div id="content" class="col-lg-10 col-sm-10">
       <div class="row">
-        <div class="row">
-            <div class="col-md-12 center login-header">
-                <div class="m-3">                
-                    <div class="alert alert-info m-3">
-                        {{ __("You're logged in!") }}
+        <div class="box col-md-12">
+            <div class="box-inner">
+                <div class="box-header well" data-original-title="">
+                    <h2>{{ __('プロフィール') }}</h2>
+                </div>
+                <div class="box-content row">
+                    <!-- content start -->
+                    <div class="box col-md-8">
+                        <div class="container">
+                            <div class="row">
+                            </div>
+                        </div>
+                        <!-- content end -->
                     </div>
                 </div>
             </div>

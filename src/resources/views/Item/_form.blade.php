@@ -1,11 +1,10 @@
+<div class="box-header well" data-original-title="">
+    <h2>レビュー品登録</h2>
+</div>
 <div class="container ops-main">
-    <div class="row">
-        <div class="col-md-6">
-            <h3 class="text-3xl font-bold text-yellow-500">レビュー品登録</h3>
-        </div>
-    </div>
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-md-8 col-md-offset-1">
+            
             {{-- エラーメッセージ --}}
             @include('item/_error_message')
 
@@ -18,6 +17,7 @@
             @endif
             {{-- TODO 画像アップロード可能にする --}}
             {{-- TODO 確認画面を追加 --}}
+                <div>　</div>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="image">ユーザー</label>
@@ -28,7 +28,7 @@
                     <input type="text" class="form-control" name="image" value="{{ $item->image }}">
                 </div>
                 <div class="form-group">
-                    <label for="image">レビュー品/label>
+                    <label for="image">レビュー品</label>
                     <input type="text" class="form-control" name="image" value="{{ $item->image }}">
                 </div>
                 <div class="form-group">
@@ -46,6 +46,7 @@
                 <button type="submit" class="btn btn-default">登録</button>
                 <a href="/item">戻る</a>
             </form>
+            <div>　</div>
         </div>
     </div>
 </div>

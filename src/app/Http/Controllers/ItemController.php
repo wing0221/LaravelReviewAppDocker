@@ -10,28 +10,28 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index():view
     {
         return view('item/index', [
-            'items' => DB::table('items')->paginate(10)
+            'items' => Item::getLatestItemsWithFavorites(10)
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create():view
     {
         $item = new Item();
-        // return view('item/create',compact('item'));
         return view('item/create',[
-            ['item' => $item]
+            'item' => $item
         ]);
     }
 
@@ -88,8 +88,7 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        $item = Item::findOrFail($id);
-        $item->delete();
+        Item::destroyItem($id);
         return redirect("/item");
     }
 }

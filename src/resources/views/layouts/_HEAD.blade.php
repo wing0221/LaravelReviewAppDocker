@@ -5,8 +5,7 @@
     <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
     <meta name="author" content="Muhammad Usman">
     <!-- The styles -->
-    <link id="bs-css" href="{{ asset('css/bootstrap-cybrog.min.css') }}" rel="stylesheet">
-
+    <link href='{{ asset('css/bootstrap-simplex.min.css') }}' rel='stylesheet'>
     <link href='{{ asset('css/charisma-app.css') }}' rel='stylesheet'>
     <link href='{{ asset('bower_components/fullcalendar/dist/fullcalendar.css') }}' rel='stylesheet'>
     <link href='{{ asset('bower_components/fullcalendar/dist/fullcalendar.print.css') }}' rel='stylesheet' media='print'>
@@ -21,10 +20,8 @@
     <link href='{{ asset('css/jquery.iphone.toggle.css') }}' rel='stylesheet'>
     <link href='{{ asset('css/uploadify.css') }}' rel='stylesheet'>
     <link href='{{ asset('css/animate.min.css') }}' rel='stylesheet'>
-
     <!-- jQuery -->
     <script src='{{ asset('bower_components/jquery/jquery.min.js') }}'></script>
-
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="charisma/http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

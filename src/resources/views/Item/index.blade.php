@@ -18,6 +18,9 @@
                     </div>
                     <!-- コンテンツ -->
                     <div class="box-content">
+
+
+
                         <table class="table table-bordered table-striped table-condensed">
                             <thead>
                             <tr>
@@ -26,7 +29,8 @@
                               <th class="text-center">名称</th>
                               <th class="text-center">メーカー</th>
                               <th class="text-center">詳細</th>
-                              <th class="text-center">削除</th>
+                              <th class="text-center">お気に入り登録</th>
+                              {{-- <th class="text-center">削除</th> --}}
                             </tr>
                             </thead>
                             <tbody>
@@ -42,12 +46,20 @@
                               <td>{{ $item->maker }}</td>
                               <td>{{ $item->content }}</td>
                               <td>
+                                <form action="{{ route('favorite-items.store') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="item_id" value="{{ $item->id }}">
+                                    <button type="submit" class="btn btn-primary">お気に入りに追加する</button>
+                                </form>
+                              </td>
+                              {{--　削除ボタン 
+                              <td>
                                 <form action="/item/{{ $item->id }}" method="post">
                                   <input type="hidden" name="_method" value="DELETE">
                                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                   <button type="submit" class="btn btn-xs btn-danger" aria-label="Left Align"><span class="glyphicon glyphicon-trash"></span></button>
                                 </form>
-                              </td>
+                              </td> --}}
                             </tr>
                             @endforeach
                             </tbody>

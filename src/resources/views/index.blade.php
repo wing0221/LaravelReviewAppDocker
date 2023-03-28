@@ -15,166 +15,41 @@
                     <div class="box-header well" data-original-title="">
                         <h2>新着レビュー</h2>
                     </div>
-
                     <div class="box-content">
                         <div class="row">
-                            <div class="box col-md-4">
-                                <div class="box-inner">
-                                    <div class="box-header well" data-original-title="">
-                                        <h2><i class="glyphicon glyphicon-th"></i> Grid 4</h2>
-
-                                        <div class="box-icon">
-                                            <a href="#" class="btn btn-setting btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-cog"></i></a>
-                                            <a href="#" class="btn btn-minimize btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-chevron-up"></i></a>
-                                            <a href="#" class="btn btn-close btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-remove"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="box-content">
-                                        <div class="row">
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/span-->
-
-                            <div class="box col-md-4">
-                                <div class="box-inner">
-                                    <div class="box-header well" data-original-title="">
-                                        <h2><i class="glyphicon glyphicon-th"></i> Grid 4</h2>
-
-                                        <div class="box-icon">
-                                            <a href="#" class="btn btn-setting btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-cog"></i></a>
-                                            <a href="#" class="btn btn-minimize btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-chevron-up"></i></a>
-                                            <a href="#" class="btn btn-close btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-remove"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="box-content">
-                                        <div class="row">
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    <!--/span-->
-                            <div class="box col-md-4">
-                                <div class="box-inner">
-                                    <div class="box-header well" data-original-title="">
-                                        <h2><i class="glyphicon glyphicon-th"></i> Grid 4</h2>
-
-                                        <div class="box-icon">
-                                            <a href="#" class="btn btn-setting btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-cog"></i></a>
-                                            <a href="#" class="btn btn-minimize btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-chevron-up"></i></a>
-                                            <a href="#" class="btn btn-close btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-remove"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="box-content">
-                                        <div class="row">
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @foreach ($latestThreeReviews as $latestThreeReview)
+                            @include('layouts/_reviewcard', 
+                                        [
+                                            'isNew' => true,
+                                            'title' => $latestThreeReview->title,
+                                            'item_id'=> $latestThreeReview->item_id,
+                                            'evaluation'=> $latestThreeReview->evaluation,
+                                            'content'=> $latestThreeReview->content,
+                                            'user_id' => $latestThreeReview->user_id,
+                                            'created_at' => $latestThreeReview->created_at 
+                                        ])
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
-
-                        <div class="box col-md-12">
+            <div class="box col-md-12">
                 <div class="box-inner">
                     <div class="box-header well" data-original-title="">
-                        <h2>新着レビュー</h2>
+                        <h2>新着アイテム</h2>
                     </div>
-
                     <div class="box-content">
                         <div class="row">
-                            <div class="box col-md-4">
-                                <div class="box-inner">
-                                    <div class="box-header well" data-original-title="">
-                                        <h2><i class="glyphicon glyphicon-th"></i> Grid 4</h2>
-
-                                        <div class="box-icon">
-                                            <a href="#" class="btn btn-setting btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-cog"></i></a>
-                                            <a href="#" class="btn btn-minimize btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-chevron-up"></i></a>
-                                            <a href="#" class="btn btn-close btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-remove"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="box-content">
-                                        <div class="row">
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/span-->
-
-                            <div class="box col-md-4">
-                                <div class="box-inner">
-                                    <div class="box-header well" data-original-title="">
-                                        <h2><i class="glyphicon glyphicon-th"></i> Grid 4</h2>
-
-                                        <div class="box-icon">
-                                            <a href="#" class="btn btn-setting btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-cog"></i></a>
-                                            <a href="#" class="btn btn-minimize btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-chevron-up"></i></a>
-                                            <a href="#" class="btn btn-close btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-remove"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="box-content">
-                                        <div class="row">
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    <!--/span-->
-                            <div class="box col-md-4">
-                                <div class="box-inner">
-                                    <div class="box-header well" data-original-title="">
-                                        <h2><i class="glyphicon glyphicon-th"></i> Grid 4</h2>
-
-                                        <div class="box-icon">
-                                            <a href="#" class="btn btn-setting btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-cog"></i></a>
-                                            <a href="#" class="btn btn-minimize btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-chevron-up"></i></a>
-                                            <a href="#" class="btn btn-close btn-round btn-default"><i
-                                                    class="glyphicon glyphicon-remove"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="box-content">
-                                        <div class="row">
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                            <div class="col-md-4"><h6>column 4</h6></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @foreach ($latestThreeItems as $latestThreeItem)
+                            @include('layouts/_itemcard', 
+                                        [
+                                            'isNew' => true,
+                                            'name' => $latestThreeItem->name,
+                                            'item_id' => $latestThreeItem->item_id,
+                                            'image' => $latestThreeItem->image,
+                                            'created_at' => $latestThreeItem->created_at
+                                        ])  
+                            @endforeach
                         </div>
                     </div>
                 </div>

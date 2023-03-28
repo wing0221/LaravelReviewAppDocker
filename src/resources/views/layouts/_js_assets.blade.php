@@ -1,5 +1,6 @@
 <!-- external javascript -->
-<script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+{{-- モーダル有効化のためには消す必要があるが・本当に消すかは要検討。 --}}
+{{-- <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script> --}}
 <!-- library for cookie management -->
 <script src="{{ asset('js/jquery.cookie.js') }}"></script>
 <!-- calender plugin -->
@@ -32,4 +33,5 @@
 <!-- bootstrap.js -->
 <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- dropdown動かすために追加 -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{{-- モーダル有効化のためには消す必要があるが・本当に消すかは要検討。 --}}
+{{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}

@@ -1,6 +1,6 @@
 $(document).ready(function () {
     //themes, change CSS with JS
-    //この変数を切り替えることにより、デフォルトのカラースキンを変更できる。
+    //この変数を切り替えることにより、デフォルトのカラースキンを変更できるが、静的ルーティング以外だとおかしくなる。ため無効にする。
     var defaultTheme = 'Simplex';
 
     var currentTheme = $.cookie('currentTheme') == null ? defaultTheme : $.cookie('currentTheme');

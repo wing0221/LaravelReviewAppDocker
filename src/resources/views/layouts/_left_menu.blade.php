@@ -23,7 +23,7 @@
                 </li>
                 @else
                 <li>
-                    <a href="{{ route('profile.edit') }}">
+                    <a href="{{ route('dashboard') }}">
                         <i class="glyphicon glyphicon-user"></i>
                         <span>マイページ</span>
                     </a>
