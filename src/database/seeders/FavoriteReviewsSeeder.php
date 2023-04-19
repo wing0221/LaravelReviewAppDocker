@@ -7,15 +7,32 @@ use Illuminate\Support\Facades\DB;
 
 class FavoriteReviewsSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run()
     {
-        for ($i = 1; $i <= 10; $i++) {
-            DB::table('favorite_reviews')->insert([
-                'user_id' => rand(1, 5),
-                'review_id' => rand(1, 20),
+        DB::table('favorite_reviews')->insert([
+            [
+                'user_id' => 1,
+                'review_id' => 1,
                 'created_at' => now(),
-                'updated_at' => now()
-            ]);
-        }
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 1,
+                'review_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 2,
+                'review_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
     }
 }
