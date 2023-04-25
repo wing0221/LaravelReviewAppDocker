@@ -13,7 +13,8 @@
         </div>
         <div class="box-content">
             <div class="text-left">{{ $item_id }}</div>
-            <div class="text-left">{{ $image }}</div>
+            {{-- <div class="text-left">{{ $image }}</div> --}}
+            <img src="data:image/png;base64, {{ base64_encode($image) }}" width="200" class="item_img">
             <span>　</span>
             <h6 class="text-right">{{ $created_at }}</h6>
         </div>

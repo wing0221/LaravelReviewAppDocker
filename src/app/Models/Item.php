@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\boolean;
+use App\Http\Requests\ItemRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,13 +14,33 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 class Item extends Model
 {
     // use HasFactory;
-    public static function getLatestItemsWithFavorites(int $perPage = 10): LengthAwarePaginator
+    public static function getLatestItems(int $perPage = 10): LengthAwarePaginator
     {
         return Item::latest()
-            ->join('favorite_items', 'favorite_items.item_id', '=', 'items.id')
             ->select('items.*')
             ->paginate($perPage);
     }
+
+    public static function putItem(ItemRequest $request)
+    {
+        $file = $request->file('image');
+        $binaryData = file_get_contents($file->getRealPath());// ファイルのバイナリデータを取得
+        $item = new Item();
+        $item->image = $binaryData;
+        $item->name = $request->name;
+        $item->maker = $request->maker;
+        $item->content = $request->content;
+        $item->save();
+    }    
+    
+    // TODO この関数はSQLが未完成。
+    // public static function getLatestItemsWithFavorites(int $perPage = 10): LengthAwarePaginator
+    // {
+    //     return Item::latest()
+    //         ->join('favorite_items', 'favorite_items.item_id', '=', 'items.id')
+    //         ->select('items.*')
+    //         ->paginate($perPage);
+    // }
 
     public static function getLatestThreeItems():Collection
     {

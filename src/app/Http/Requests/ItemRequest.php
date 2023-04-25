@@ -16,7 +16,6 @@ class ItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required|string|max:50',
             'name' => 'required|string|max:128',
             'maker' => 'required|string|max:50',
             'content' => 'required|string|max:512',

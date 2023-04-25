@@ -20,7 +20,7 @@ class ItemController extends Controller
     public function index():view
     {
         return view('item/index', [
-            'items' => Item::getLatestItemsWithFavorites(10)
+            'items' => Item::getLatestItems(10)
         ]);
     }
 
@@ -40,13 +40,16 @@ class ItemController extends Controller
      */
     public function store(ItemRequest $request)
     {
-        $item = new Item();
-        $item->image = $request->image;
-        $item->name = $request->name;
-        $item->maker = $request->maker;
-        $item->content = $request->content;
-        $item->save();
 
+        // $file = $request->file('image');
+        // $binaryData = file_get_contents($file->getRealPath());// ファイルのバイナリデータを取得
+        // $item = new Item();
+        // $item->image = $binaryData;
+        // $item->name = $request->name;
+        // $item->maker = $request->maker;
+        // $item->content = $request->content;
+        // $item->save();
+        Item::putItem($request);
         return redirect('/item');       
     }
 

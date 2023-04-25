@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('maker');
-            $table->string('image');
+            $table->binary('image');
             $table->string('content');
             $table->timestamps();
         });

@@ -40,7 +40,7 @@
                                 <a href="/item/{{ $item->id }}/edit">{{ $item->id }}</a>
                               </td>
                               <td>
-                                <img src="{{ asset($item->image) }}" width="64" height="64">
+                                <img src="data:image/png;base64, {{ base64_encode($item->image) }}" width="64" height="64" class="item_img">
                               </td>
                               <td>{{ $item->name }}</td>
                               <td>{{ $item->maker }}</td>
@@ -52,19 +52,18 @@
                                     <button type="submit" class="btn btn-primary">お気に入りに追加する</button>
                                 </form>
                               </td>
-                              {{--　削除ボタン 
                               <td>
                                 <form action="/item/{{ $item->id }}" method="post">
                                   <input type="hidden" name="_method" value="DELETE">
                                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                   <button type="submit" class="btn btn-xs btn-danger" aria-label="Left Align"><span class="glyphicon glyphicon-trash"></span></button>
                                 </form>
-                              </td> --}}
+                              </td>
                             </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        <div><div>{{ $items->links() }}</div></div>
+                        {{-- <div><div>{{ $items->links() }}</div></div> --}}
                     </div>
                 </div>
             </div><!--/span-->
