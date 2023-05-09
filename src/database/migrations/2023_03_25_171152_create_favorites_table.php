@@ -12,6 +12,10 @@ class CreateFavoritesTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('item_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+
+            // 複合キーを設定
+            $table->primary(['user_id', 'item_id']);
+            $table->unique(['user_id', 'item_id']);
         });
     }
 

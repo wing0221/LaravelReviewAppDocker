@@ -30,11 +30,19 @@ class FavoriteItem extends Model
 
     public static function storeLoggedInUserFavoriteItem(Request $request):void
     {
-        // dd($request);
         $favorite = new FavoriteItem();
         $favorite->user_id = auth()->id();
-        // $favorite->item_id = $request->item_id;
-        $favorite->item_id = 2;
+        $favorite->item_id = $request->input('item_id');
         $favorite->save();
+    }
+    
+    //TODO 途中
+    public static function destroyLoggedInUserFavoriteItem($id):void
+    {
+        $user_id = auth()->id();
+        FavoriteItem::where([
+                        ['user_id', $user_id],
+                        ['item_id', $id],
+                    ])->delete();
     }
 }

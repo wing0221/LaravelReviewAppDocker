@@ -9,6 +9,7 @@ use App\Http\Requests\ItemRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class Item extends Model
@@ -20,6 +21,21 @@ class Item extends Model
             ->select('items.*')
             ->paginate($perPage);
     }
+    public static function getLatestItemsWithFavorites(int $perPage = 10): LengthAwarePaginator
+    {
+        $userId = auth()->id();
+        return DB::table('items')
+            ->leftJoin('favorite_items', function ($join) use ($userId) {
+                $join->on('items.id', '=', 'favorite_items.item_id')
+                    ->where('favorite_items.user_id', $userId);
+            })//お気に入り登録情報を結合
+            ->select('items.*', 
+                    DB::raw("IF(favorite_items.created_at IS NULL, FALSE, TRUE) 
+                             as is_favorite"
+                           ))//お気に入り登録をしているか否かのフラグをつける
+            ->paginate($perPage);
+    }
+
 
     public static function putItem(ItemRequest $request)
     {
@@ -33,15 +49,6 @@ class Item extends Model
         $item->save();
     }    
     
-    // TODO この関数はSQLが未完成。
-    // public static function getLatestItemsWithFavorites(int $perPage = 10): LengthAwarePaginator
-    // {
-    //     return Item::latest()
-    //         ->join('favorite_items', 'favorite_items.item_id', '=', 'items.id')
-    //         ->select('items.*')
-    //         ->paginate($perPage);
-    // }
-
     public static function getLatestThreeItems():Collection
     {
         return Item::latest()

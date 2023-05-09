@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('favorite_reviews', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('review_id')->constrained()->onDelete('cascade');
-            $table->primary(['user_id', 'review_id']);
             $table->timestamps();
+
+            $table->primary(['user_id', 'review_id']);
+            $table->unique(['user_id', 'review_id']);
         });
     }
 

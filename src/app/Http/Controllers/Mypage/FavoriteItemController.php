@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
-
+use Illuminate\Http\RedirectResponse;
 
 class FavoriteItemController extends Controller
 {
@@ -21,15 +21,17 @@ class FavoriteItemController extends Controller
         ]);
     }
 
-    public function store(Request $request):Response
+    public function store(Request $request): RedirectResponse
     {
         // dd($request);
         FavoriteItem::storeLoggedInUserFavoriteItem($request);
-        return response('', Response::HTTP_NO_CONTENT);
+        return back();
     }
 
-    public function destroy(): view
+    public function destroy($id): RedirectResponse
     {
-        // FavoriteItem::destroyLoggedInUserFavoriteItem();
+        // dd($id);
+        FavoriteItem::destroyLoggedInUserFavoriteItem($id);
+        return back();
     }
 }
