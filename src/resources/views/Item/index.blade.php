@@ -27,8 +27,8 @@
                               <th class="text-center">名称</th>
                               <th class="text-center">メーカー</th>
                               <th class="text-center">詳細</th>
-                              <th class="text-center">お気に入り登録</th>
                               <th class="text-center">日付</th>
+                              <th class="text-center">お気に入り登録</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -43,22 +43,8 @@
                               <td>{{ $item->name }}</td>
                               <td>{{ $item->maker }}</td>
                               <td>{{ $item->content }}</td>
-                              <td>
-                              @if($item->is_favorite)
-                                <form action="{{ route('favorite-items.destroy',$item->id) }}" method="post">
-                                  @csrf
-                                  @method('DELETE')
-                                    <button type="submit"  class="btn btn-primary ">⭐️</button>
-                                </form>
-                              @else
-                                <form action="{{ route('favorite-items.store') }}" method="post">
-                                  @csrf
-                                    <input type="hidden" name="item_id" value="{{ $item->id }}">
-                                    <button type="submit" class="btn btn-primary ">☆</button>
-                              </form>
-                              @endif
-                              </td>
                               <td>{{ $item->created_at }}</td>
+                              <td class="center-block">@include('layouts/_favorite-items-button')</td>
                             </tr>
                             @endforeach
                             </tbody>
