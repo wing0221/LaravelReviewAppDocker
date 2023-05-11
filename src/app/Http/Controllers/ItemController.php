@@ -88,4 +88,8 @@ class ItemController extends Controller
         Item::destroyItem($id);
         return redirect("/item");
     }
+    public function search(Request $request)
+    {
+        return redirect("/item");
+    }
 }

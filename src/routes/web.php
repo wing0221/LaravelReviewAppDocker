@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
 
 //Itemのルーティング
 Route::resource('item', ItemController::class);
+Route::get('item/search',[ItemController::class,'keyword_search'])
+    ->name('item.search');
     
 
 //reviewのルーティング
