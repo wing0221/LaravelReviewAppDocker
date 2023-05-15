@@ -18,13 +18,19 @@ class ItemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index():view
+    public function index(Request $request):view
     {
-        // dd(Item::getLatestItemsWithFavorites(10));
-        return view('item/index', [
-            // 'items' => Item::getLatestItemsWithFavorites(10)
-            'items' => Item::getLatestItemsWithFavorites(10)
-        ]);
+        // dd($request->input('keyword'));
+        if(null !== $request->input('keyword'))
+        {
+            return view('item/index', [
+            'items' => Item::WhereNameOrContent($request)
+            ]);
+        } else {
+            return view('item/index', [
+            'items' => Item::getLatestItemsWithFavorites()
+            ]);
+        }
     }
 
     /**
@@ -86,10 +92,6 @@ class ItemController extends Controller
     public function destroy($id)
     {
         Item::destroyItem($id);
-        return redirect("/item");
-    }
-    public function search(Request $request)
-    {
         return redirect("/item");
     }
 }

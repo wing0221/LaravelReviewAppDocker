@@ -19,14 +19,15 @@
                     <!-- コンテンツ -->
                     <div class="box-content">
                     {{--  検索機能 --}}
-                    <div class="control-group">
-                      <form action="{{ route('item.search') }}" method="GET" class="form-inline">
-                        <div class="form-group">
-                          <input type="text" name="keyword" placeholder="キーワードを入力" class="form-control">
+                        @csrf
+                        <div class="control-group">
+                          <form action="{{ route('item.index') }}" method="GET" class="form-inline">
+                            <div class="form-group">
+                              <input type="text" name="keyword" placeholder="キーワードを入力" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">検索</button>
+                          </form>
                         </div>
-                        <button type="submit" class="btn btn-primary">検索</button>
-                      </form>
-                    </div>
                         <table class="table table-bordered table-striped table-condensed">
                             <thead>
                             <tr>

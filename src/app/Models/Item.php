@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\boolean;
+use Illuminate\Http\Request;
 use App\Http\Requests\ItemRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,14 +15,16 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class Item extends Model
 {
+    protected static $parPage = 10;
+
     // use HasFactory;
-    public static function getLatestItems(int $perPage = 10): LengthAwarePaginator
+    public static function getLatestItems(): LengthAwarePaginator
     {
         return Item::latest()
             ->select('items.*')
-            ->paginate($perPage);
+            ->paginate(Item::getpage());
     }
-    public static function getLatestItemsWithFavorites(int $perPage = 10): LengthAwarePaginator
+    public static function getLatestItemsWithFavorites(): LengthAwarePaginator
     {
         $userId = auth()->id();
         return DB::table('items')
@@ -33,7 +36,7 @@ class Item extends Model
                     DB::raw("IF(favorite_items.created_at IS NULL, FALSE, TRUE) 
                              as is_favorite"
                            ))//お気に入り登録をしているか否かのフラグをつける
-            ->paginate($perPage);
+            ->paginate(Item::$parPage);
     }
 
 
@@ -78,6 +81,26 @@ class Item extends Model
                 ->join('favorite_items', 'favorite_items.item_id', '=', 'items.id')
                 ->where('user_id', $userId)
                 ->select('items.*')
-                ->paginate($perPage);
+                ->paginate(Item::$parPage);
+    }
+    public static function WhereNameOrContent(Request $request)
+    {
+        $search = $request->input('keyword');
+        // 検索機能
+        $userId = auth()->id();
+        return DB::table('items')
+            ->where('content', 'LIKE', "%${search}%")
+            ->leftJoin('favorite_items', function ($join) use ($userId) {
+                $join->on('items.id', '=', 'favorite_items.item_id')
+                    ->where('favorite_items.user_id', $userId);
+            })//お気に入り登録情報を結合
+            ->select('items.*', 
+                    DB::raw("IF(favorite_items.created_at IS NULL, FALSE, TRUE) 
+                             as is_favorite"
+                           ))//お気に入り登録をしているか否かのフラグをつける
+            ->paginate(Item::$parPage);
+    // return  Item::where('content', 'LIKE', "%${search}%")
+    //              ->orwhere('title', 'LIKE', "%${search}%")
+    //              ->paginate(10);
     }
 }
