@@ -7,14 +7,14 @@
       @include('layouts/_left_menu')
       @include('layouts/_noscript')
       <div id="content" class="col-lg-10 col-sm-10">
-        @include('layouts/_breadcrumbs_list')
+        {{ Breadcrumbs::render('item') }}
         <div class="row">
             <div class="box col-md-12">
                 <div class="box-inner">
                     <!-- タイトル -->
                     <div class="box-header well" data-original-title="">
                         <h2>アイテム一覧</h2>
-                        <div><a href="/item/create" class="btn btn-default">新規作成</a></div>
+                        {{-- <div><a href="/item/create" class="btn btn-default">新規作成</a></div> --}}
                     </div>
                     <!-- コンテンツ -->
                     <div class="box-content">
@@ -28,6 +28,13 @@
                             <button type="submit" class="btn btn-primary">検索</button>
                           </form>
                         </div>
+                        <div>　</div>
+                        {{-- 検索結果が見つからなかった場合はフラッシュメッセージを表示 --}}
+                        @if( count($items) == 0 )
+                        <div class="alert alert-success">
+                            {{ "検索結果が見つかりせんでした。別のキーワードをお試しください。" }}
+                        </div>
+                        @else
                         <table class="table table-bordered table-striped table-condensed">
                             <thead>
                             <tr>
@@ -40,11 +47,12 @@
                               <th class="text-center">お気に入り登録</th>
                             </tr>
                             </thead>
+                        @endif
                             <tbody>
                             @foreach($items as $item)
                             <tr>
                               <td>
-                                <a href="/item/{{ $item->id }}/edit">{{ $item->id }}</a>
+                                <a href="/item/{{ $item->id }}">{{ $item->id }}</a>
                               </td>
                               <td>
                                 <img src="data:image/png;base64, {{ base64_encode($item->image) }}" width="64" height="64" class="item_img">
@@ -58,7 +66,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {{-- <div><div>{{ $items->links() }}</div></div> --}}
+                        <div><div>{{ $items->links() }}</div></div>
                     </div>
                 </div>
             </div><!--/span-->

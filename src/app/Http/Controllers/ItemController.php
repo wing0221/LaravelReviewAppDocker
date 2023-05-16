@@ -56,9 +56,12 @@ class ItemController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Item $item): Response
+    public function show($id)
     {
-        //
+            // DBよりURIパラメータと同じIDを持つItemの情報を取得
+        $item = Item::findOrFail($id);
+        // 取得した値をビュー「book/edit」に渡す
+        return view('item/show', ['item' => $item]);    
     }
 
     /**

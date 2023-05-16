@@ -39,6 +39,24 @@ class Item extends Model
             ->paginate(Item::$parPage);
     }
 
+    public static function WhereNameOrContent(Request $request)
+    {
+        // 検索キーワード
+        $search = $request->input('keyword');
+
+        $userId = auth()->id();
+        return DB::table('items')
+            ->where('content', 'LIKE', "%${search}%")
+            ->leftJoin('favorite_items', function ($join) use ($userId) {
+                $join->on('items.id', '=', 'favorite_items.item_id')
+                    ->where('favorite_items.user_id', $userId);
+            })//お気に入り登録情報を結合
+            ->select('items.*', 
+                    DB::raw("IF(favorite_items.created_at IS NULL, FALSE, TRUE) 
+                             as is_favorite"
+                           ))//お気に入り登録をしているか否かのフラグをつける
+            ->paginate(Item::$parPage);
+    }
 
     public static function putItem(ItemRequest $request)
     {
@@ -63,7 +81,6 @@ class Item extends Model
     {
         try {
             $item = Item::findOrFail($id);
-            // $item->delete();
             return true;
         } catch (ModelNotFoundException $e) {
             return false;
@@ -83,24 +100,5 @@ class Item extends Model
                 ->select('items.*')
                 ->paginate(Item::$parPage);
     }
-    public static function WhereNameOrContent(Request $request)
-    {
-        $search = $request->input('keyword');
-        // 検索機能
-        $userId = auth()->id();
-        return DB::table('items')
-            ->where('content', 'LIKE', "%${search}%")
-            ->leftJoin('favorite_items', function ($join) use ($userId) {
-                $join->on('items.id', '=', 'favorite_items.item_id')
-                    ->where('favorite_items.user_id', $userId);
-            })//お気に入り登録情報を結合
-            ->select('items.*', 
-                    DB::raw("IF(favorite_items.created_at IS NULL, FALSE, TRUE) 
-                             as is_favorite"
-                           ))//お気に入り登録をしているか否かのフラグをつける
-            ->paginate(Item::$parPage);
-    // return  Item::where('content', 'LIKE', "%${search}%")
-    //              ->orwhere('title', 'LIKE', "%${search}%")
-    //              ->paginate(10);
-    }
+    
 }

@@ -7,7 +7,7 @@
         @include('layouts/_left_menu')
         @include('layouts/_noscript')
         <div id="content" class="col-lg-10 col-sm-10">
-        @include('layouts/_breadcrumbs_list')
+        {{ Breadcrumbs::render('home') }}
         <div class="row">
 
             <div class="box col-md-12">
