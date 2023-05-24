@@ -38,7 +38,13 @@
                 <li class="divider"></li>
                 <li><a href="{{ route('register') }}">ユーザ登録</a></li>
             </ul>
-        @endif
+        @endif                
         </div>
+        @csrf
+        <form action="{{ route('review.index') }}" method="GET" class="navbar-search pull-right">
+        <div class="form-group">
+            <input type="text" name="keyword" placeholder="レビューを検索" class="form-control">
+        </div>
+        </form>
     </div>
 </div>  

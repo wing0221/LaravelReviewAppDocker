@@ -58,6 +58,7 @@
                         <i class="glyphicon glyphicon-search"></i>
                         <span>検索</span>
                     </a>
+                    @csrf
                 </li>
                 @auth
                 <li>

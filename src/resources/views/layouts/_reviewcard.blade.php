@@ -19,9 +19,9 @@
                 <div>
                 @for($i = 0; $i < 5; $i++)
                     @if($i < (int)$evaluation)
-                    <img src="img/star-on.png" alt="1" title="bad">
+                    <img src="{{ asset('images/star-on.png') }}" alt="Image" class="hidden-xs"/>
                     @else
-                    <img src="img/star-off.png" alt="5" title="gorgeous">
+                    <img src="{{ asset('images/star-off.png') }}" alt="Image" class="hidden-xs"/>
                     @endif
                 @endfor
                 </div>

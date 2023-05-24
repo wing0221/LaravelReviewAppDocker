@@ -11,7 +11,7 @@
         <div class="box col-md-12">
             <div class="box-inner">
                 <div class="box-header well" data-original-title="">
-                    <h2>{{ __('＊＊＊＊さんのプロフィール') }}</h2>
+                    <h2>{{ $user_data->name }}さんのプロフィール</h2>
                 </div>
                 <div class="box-content row">
                     <!-- content start -->
@@ -29,17 +29,24 @@
         <div class="box col-md-12">
             <div class="box-inner">
                 <div class="box-header well" data-original-title="">
-                    <h2>{{ __('＊＊＊＊さんの投稿したレビュー') }}</h2>
+                    <h2>{{ $user_data->name }}さんの投稿したレビュー</h2>
                 </div>
-                <div class="box-content row">
-                    <!-- content start -->
-                    <div class="box col-md-8">
-                        <div class="container">
-                            <div class="row">
-                                <div>{{ $user_reviws }}</div>
-                            </div>
+                    <div class="box-content">
+                        <div class="row">                            
+                        @foreach ($user_reviews as $user_review)
+                            @include('layouts/_reviewcard', 
+                                        [
+                                            'isNew' => false,
+                                            'title' => $user_review->title,
+                                            'item_name'=> $user_review->item_name,
+                                            'evaluation'=> $user_review->evaluation,
+                                            'content'=> $user_review->content,
+                                            'user_id' => $user_review->user_id,
+                                            'user_name' => $user_review->user_name,
+                                            'created_at' => $user_review->created_at 
+                                        ])
+                            @endforeach
                         </div>
-                        <!-- content end -->
                     </div>
                 </div>
             </div>

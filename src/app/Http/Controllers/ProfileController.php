@@ -31,7 +31,7 @@ class ProfileController extends Controller
 
         return view('/profile/otheruser',[
             'user_data' => $userData,
-            'user_reviws' => $userReviews
+            'user_reviews' => $userReviews
         ]);
     }
 

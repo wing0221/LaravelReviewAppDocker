@@ -26,6 +26,7 @@
                                         'item_name'=> $review->item_name,
                                         'evaluation'=> $review->evaluation,
                                         'content'=> $review->content,
+                                        'user_id' => $review->user_id,
                                         'user_name' => $review->user_name,
                                         'created_at' => $review->created_at 
                                     ])

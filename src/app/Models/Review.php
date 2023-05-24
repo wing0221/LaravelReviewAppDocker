@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,7 @@ class Review extends Model
 {
     use HasFactory;
 
-    public static function getUserReviews($id): Collection
+    public static function getReviews(): Builder
     {
         return Review::latest()
             ->join('items', 'reviews.item_id', '=', 'items.id')
@@ -28,29 +29,31 @@ class Review extends Model
                 'items.name as item_name',
                 'users.name as user_name'
             )
-            ->orderBy('reviews.created_at', 'desc')
+            ->orderBy('reviews.created_at', 'desc');        
+    }
+
+    public static function getUserReviews($id): Collection
+    {
+        return Review::getReviews()
             ->where('reviews.user_id', '=', $id)
             ->get();
     }
 
     public static function getLatestThreeReviews(): Collection
     {
-        return Review::latest()
-            ->join('items', 'reviews.item_id', '=', 'items.id')
-            ->join('users', 'reviews.user_id', '=', 'users.id')
-            ->select(
-                'reviews.title',
-                'reviews.user_id',
-                'reviews.content',
-                'reviews.evaluation',
-                'reviews.created_at',
-                'items.name as item_name',
-                'users.name as user_name'
-            )
-            ->orderBy('reviews.created_at', 'desc')
+        return Review::getReviews()
             ->limit(3)
             ->get();
     }
+
+    public static function searchReviewsByKeyword($keyword): Collection
+    {
+        //TODO キーワーど検索 
+        return Review::getReviews()
+            ->limit(3)
+            ->get();
+    }
+    
 
     public static function inputReview(Request $request): void
     {
