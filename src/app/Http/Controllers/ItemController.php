@@ -23,14 +23,14 @@ class ItemController extends Controller
         // dd($request->input('keyword'));
         if(null !== $request->input('keyword'))
         {
-            return view('item/index', [
-            'items' => Item::WhereNameOrContent($request)
-            ]);
+            $item = Item::WhereNameOrContent($request);
         } else {
-            return view('item/index', [
-            'items' => Item::getLatestItemsWithFavorites()
-            ]);
+            
+            $item = Item::getLatestItemsWithFavorites();
         }
+        return view('item/index', [
+            'items' => $item
+        ]);
     }
 
     /**

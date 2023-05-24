@@ -14,10 +14,8 @@
             {{-- TODO 確認画面を追加 --}}
                 <div>　</div>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                {{-- TODO ログインUserのIDを自動入力し、hiddenで送信 --}}
                 <div class="form-group">
-                    <label for="item_id">ユーザー</label>
-                    <input type="text" class="form-control" name="user_id" value="{{ $review->user_id }}">
+                    <input type="hidden" class="form-control" name="user_id" value="{{ auth()->user()->id }}">
                 </div>
                 <div class="form-group">
                     <label for="item-id">レビュー品</label>
@@ -29,8 +27,14 @@
                 </div>
                 {{-- TODO 五つ星を押して入力するやつにする --}}
                 <div class="form-group">
-                    <label for="evaluation">評価</label>
-                    <input type="text" class="form-control" name="evaluation" value="{{ $review->evaluation }}">
+                <label for="evaluation">評価</label>
+                <div>
+                    <input type="radio" name="evaluation" value="1"> 1
+                    <input type="radio" name="evaluation" value="2"> 2
+                    <input type="radio" name="evaluation" value="3"> 3
+                    <input type="radio" name="evaluation" value="4"> 4
+                    <input type="radio" name="evaluation" value="5"> 5
+                </div>
                 </div>
                 <div class="form-group">
                     <label for="title">タイトル</label>

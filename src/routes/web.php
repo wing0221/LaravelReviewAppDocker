@@ -17,6 +17,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// 他のユーザーのプロフィール
+Route::get('/users/{id}', [ProfileController::class, 'show_other'])
+    ->name('profile.show_other');
+
 //ログイン時のみのルーティング
 Route::middleware('auth')->group(function () {
     //profile
@@ -26,13 +30,15 @@ Route::middleware('auth')->group(function () {
         ->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
-    
+
     // favorite_items
     Route::get(
-                '/favorite-items',
-                 [FavoriteItemController::class, 
-                 'logged_in_user_favorite_items']
-                 )
+        '/favorite-items',
+        [
+            FavoriteItemController::class,
+            'logged_in_user_favorite_items'
+        ]
+    )
         ->name('favoriteitems.logged-in-user-favorite-items');
     Route::resource('/favorite-items', FavoriteItemController::class)
         ->only(['store', 'destroy']);
@@ -45,13 +51,13 @@ Route::middleware('auth')->group(function () {
     //              )
     //     ->name('favoriteitems.logged-in-user-favorite-items');
     // Route::resource('/favorite-items', FavoriteItemController::class)
-        // ->only(['store', 'destroy']);
+    // ->only(['store', 'destroy']);
 });
 
 //Itemのルーティング
 Route::resource('item', ItemController::class);
-    
+
 //reviewのルーティング
 Route::resource('review', ReviewController::class);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

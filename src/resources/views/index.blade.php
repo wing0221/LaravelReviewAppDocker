@@ -7,9 +7,18 @@
         @include('layouts/_left_menu')
         @include('layouts/_noscript')
         <div id="content" class="col-lg-10 col-sm-10">
-        {{ Breadcrumbs::render('home') }}
         <div class="row">
-
+            <div class="box col-md-12">
+                <div class="box-inner">
+                    <div class="box-header well" data-original-title="">
+                        <h2>お知らせ</h2>
+                    </div>
+                    <div class="box-content">
+                        <div class="row">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="box col-md-12">
                 <div class="box-inner">
                     <div class="box-header well" data-original-title="">
@@ -22,10 +31,11 @@
                                         [
                                             'isNew' => true,
                                             'title' => $latestThreeReview->title,
-                                            'item_id'=> $latestThreeReview->item_id,
+                                            'item_name'=> $latestThreeReview->item_name,
                                             'evaluation'=> $latestThreeReview->evaluation,
                                             'content'=> $latestThreeReview->content,
                                             'user_id' => $latestThreeReview->user_id,
+                                            'user_name' => $latestThreeReview->user_name,
                                             'created_at' => $latestThreeReview->created_at 
                                         ])
                             @endforeach

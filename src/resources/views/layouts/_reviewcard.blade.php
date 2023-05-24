@@ -1,4 +1,4 @@
-<div class="box col-md-4">
+<div class="box col-md-12">
     <div class="box-inner">
         <div class="box-header well" data-original-title="">
             <div class="box-icon">
@@ -8,19 +8,34 @@
             </div>
             <h2>
                 <i class="glyphicon glyphicon-th"></i> 
-                {{ $title }}
+                {{ $item_name }} 
             </h2>
         </div>
         <div class="box-content">
             <div class="text-left">
-            {{ $item_id }}
-            <span>　　　</span>
-            {{ $evaluation }}
+                <h4 class="font-weight-bold">
+                    {{ $title }}
+                </h4>
+                <div>
+                @for($i = 0; $i < 5; $i++)
+                    @if($i < (int)$evaluation)
+                    <img src="img/star-on.png" alt="1" title="bad">
+                    @else
+                    <img src="img/star-off.png" alt="5" title="gorgeous">
+                    @endif
+                @endfor
+                </div>
             </div>
+            <br>
             <div class="text-left">{{ $content }}</div>
             <span>　</span>
-            <h6 class="text-right">{{ $user_id }}<span>　</span>
-            {{ $created_at }}</h6>
+            <h6 class="text-right">
+                <span class="glyphicon glyphicon-user"></span>
+                <a href="{{ route('profile.show_other',$user_id)}}">
+                    <span>{{ $user_name }}</span>
+                </a>
+                <span>　</span>{{ $created_at }}
+            </h6>
         </div>
     </div>
 </div>

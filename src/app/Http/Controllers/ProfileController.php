@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\RootController;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
+use App\Models\Review;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +17,25 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+    public function show_other($id)
+    {
+        $intId = (int)$id;
+        $loggedInUserId = auth()->id();
+
+        //ログインしているユーザーがゲスト、またはルーティング先のユーザーページと同じユーザーである
+        if($intId === $loggedInUserId || null === $loggedInUserId){
+           return redirect()->route('dashboard');           
+        }
+        $userData = User::find($id);
+        $userReviews = Review::getUserReviews($id);
+
+        return view('/profile/otheruser',[
+            'user_data' => $userData,
+            'user_reviws' => $userReviews
+        ]);
+    }
+
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [

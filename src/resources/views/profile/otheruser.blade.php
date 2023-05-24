@@ -4,26 +4,39 @@
 @include('layouts/_topbar')
 <div class="ch-container">
   <div class="row">
-    @include('layouts/_left_menu_mypage') 
+    @include('layouts/_left_menu')
     @include('layouts/_noscript')
     <div id="content" class="col-lg-10 col-sm-10">
       <div class="row">
         <div class="box col-md-12">
             <div class="box-inner">
                 <div class="box-header well" data-original-title="">
-                    <h2>{{ __('プロフィール') }}</h2>
+                    <h2>{{ __('＊＊＊＊さんのプロフィール') }}</h2>
                 </div>
                 <div class="box-content row">
                     <!-- content start -->
                     <div class="box col-md-8">
                         <div class="container">
                             <div class="row">
-                            @php
-                                $user = auth()->user()
-                            @endphp
-                                <div>ユーザー名：{{ $user->name }}</div>
-                                <div>登録日：{{ $user->created_at }}</div>
-                                <div>メールアドレス：{{ $user->email }}</div>
+                                <div>{{ $user_data }}</div>
+                            </div>
+                        </div>
+                        <!-- content end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box col-md-12">
+            <div class="box-inner">
+                <div class="box-header well" data-original-title="">
+                    <h2>{{ __('＊＊＊＊さんの投稿したレビュー') }}</h2>
+                </div>
+                <div class="box-content row">
+                    <!-- content start -->
+                    <div class="box col-md-8">
+                        <div class="container">
+                            <div class="row">
+                                <div>{{ $user_reviws }}</div>
                             </div>
                         </div>
                         <!-- content end -->

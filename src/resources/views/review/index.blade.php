@@ -17,7 +17,21 @@
                     <h2>レビュー一覧</h2>
                 </div>
                 <div class="box-content">
-                    <table class="table table-bordered table-striped table-condensed">
+                    <div class="row">
+                        @foreach($reviews as $review)
+                        @include('layouts/_reviewcard', 
+                                    [
+                                        'isNew' => true,
+                                        'title' => $review->title,
+                                        'item_name'=> $review->item_name,
+                                        'evaluation'=> $review->evaluation,
+                                        'content'=> $review->content,
+                                        'user_name' => $review->user_name,
+                                        'created_at' => $review->created_at 
+                                    ])
+                        @endforeach
+                    </div>
+                    {{-- <table class="table table-bordered table-striped table-condensed">
                         <thead>
                         <tr>
                             <th class="text-center">ID</th>
@@ -42,7 +56,7 @@
                         </tr>
                         @endforeach
                         </tbody>
-                    </table>
+                    </table> --}}
                     <div><div>{{ $reviews->links() }}</div></div>
                 </div>
             </div>

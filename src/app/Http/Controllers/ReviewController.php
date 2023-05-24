@@ -33,19 +33,7 @@ class ReviewController extends Controller
     }
     public function store(Request $request)
     {
-        $review = new review();
-        $review->user_id = $request->user_id;
-        // item_nameを元にitem_idを持ってくる
-        $item_id = DB::table('items')
-                    ->select('items.id')
-                    ->where('name','=',$request->item_name)
-                    ->get();
-        $review->item_id = $item_id[0]->id;
-        $review->evaluation = $request->evaluation;
-        $review->title = $request->title;
-        $review->content = $request->content;
-        $review->save();
-
+        Review::inputReview($request);
         return redirect('/review');   
     }
     public function show(string $id): Response

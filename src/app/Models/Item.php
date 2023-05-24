@@ -87,13 +87,9 @@ class Item extends Model
         }
     }
 
-    public static function getLoggedInUserFavoriteItems(int $perPage = 10): LengthAwarePaginator
+    public static function getLoggedInUserFavoriteItems(): LengthAwarePaginator
     {
         $userId = auth()->id();
-
-        if ($userId === null) {
-            return null;
-        }
         return Item::latest()
                 ->join('favorite_items', 'favorite_items.item_id', '=', 'items.id')
                 ->where('user_id', $userId)

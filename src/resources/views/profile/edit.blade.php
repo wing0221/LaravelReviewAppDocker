@@ -7,7 +7,6 @@
       @include('layouts/_left_menu_mypage')
       @include('layouts/_noscript')
       <div id="content" class="col-lg-10 col-sm-10">
-        @include('layouts/_breadcrumbs_list')
         <div class="row">
             <div class="box col-md-12">
                 <div class="box-inner">
