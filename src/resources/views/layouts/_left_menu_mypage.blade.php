@@ -35,7 +35,10 @@
                             </a>
                         </li>
                         <li>
-                            <a class="ajax-link" href="#">
+                            <a 
+                              class="ajax-link" 
+                              href="{{ route('favoritereviews.logged-in-user-favorite-reviews') }}"
+                              >
                             <i class="glyphicon glyphicon-list-alt"></i>
                             <span>レビュー</span>
                         </a>

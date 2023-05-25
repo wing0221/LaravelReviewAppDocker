@@ -11,10 +11,14 @@
             <div class="box col-md-12">
                 <div class="box-inner">
                     <div class="box-header well" data-original-title="">
-                        <h2>お知らせ</h2>
+                        <h2>ようこそ、トイズネットへ！</h2>
                     </div>
                     <div class="box-content">
                         <div class="row">
+                        <h3 class="box col-md-12">
+                            品質と信頼性に拘り、あなたの最高の選択をサポートします。
+                            素晴らしい商品体験のために、一緒に探求しましょう。
+                        </h3>
                         </div>
                     </div>
                 </div>

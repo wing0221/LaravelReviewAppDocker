@@ -53,13 +53,6 @@
                         <span>ランキング</span>
                     </a>
                 <li>
-                <li>
-                    <a class="ajax-link" href="#">
-                        <i class="glyphicon glyphicon-search"></i>
-                        <span>検索</span>
-                    </a>
-                    @csrf
-                </li>
                 @auth
                 <li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>

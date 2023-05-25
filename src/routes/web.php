@@ -44,14 +44,16 @@ Route::middleware('auth')->group(function () {
         ->only(['store', 'destroy']);
 
     // favorite_reviews
-    // Route::get(
-    //             '/favorite-items',
-    //              [FavoriteItemController::class, 
-    //              'logged_in_user_favorite_items']
-    //              )
-    //     ->name('favoriteitems.logged-in-user-favorite-items');
-    // Route::resource('/favorite-items', FavoriteItemController::class)
-    // ->only(['store', 'destroy']);
+    Route::get(
+                '/favorite-reviews',
+                 [
+                    FavoritereviewController::class, 
+                    'logged_in_user_favorite_reviews'
+                    ]
+                )
+        ->name('favoritereviews.logged-in-user-favorite-reviews');
+    Route::resource('/favorite-reviews', FavoritereviewController::class)
+    ->only(['store', 'destroy']);
 });
 
 //Itemのルーティング

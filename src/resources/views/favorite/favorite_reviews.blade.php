@@ -11,13 +11,31 @@
           <div class="box col-md-12">
             <div class="box-inner">
                 <div class="box-header well" data-original-title="">
-                    <h2>{{ __('お気に入り') }}</h2>
+                    <h2>{{ __('お気に入りのレビュー一覧') }}</h2>
                 </div>
                 <div class="box-content row">
                     <!-- content start -->
                     <div class="box col-md-8">
                         <div class="container">
                             <div class="row">
+                              @if(count($LoggedInUserFavoritereviews) == 0)
+                              <div class="alert alert-success box col-md-8">
+                                {{ "お気に入りのレビューはありません。" }}
+                              </div>
+                              @endif
+                              @foreach($LoggedInUserFavoritereviews as $LoggedInUserFavoritereview)
+                              @include('layouts/_reviewcard', 
+                                          [
+                                              'isNew' => false,
+                                              'title' => $LoggedInUserFavoritereview->title,
+                                              'item_name'=> $LoggedInUserFavoritereview->item_name,
+                                              'evaluation'=> $LoggedInUserFavoritereview->evaluation,
+                                              'content'=> $LoggedInUserFavoritereview->content,
+                                              'user_id' => $LoggedInUserFavoritereview->user_id,
+                                              'user_name' => $LoggedInUserFavoritereview->user_name,
+                                              'created_at' => $LoggedInUserFavoritereview->created_at 
+                                          ])
+                              @endforeach
                             </div>
                         </div>
                         <!-- content end -->
