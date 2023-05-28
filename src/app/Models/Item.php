@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ItemRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-// use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -105,5 +104,14 @@ class Item extends Model
                 ->select('items.*')
                 ->paginate(Item::$parPage);
     }
+    // public static function getItemEvaluationAverage(): LengthAwarePaginator
+    // {
+    //     $userId = auth()->id();z
+    //     return Item::latest()
+    //             ->join('reviews', 'reviews.item_id', '=', 'items.id')
+    //             ->select('items.id','reviews.evaluation','items.created_at')
+    //             ->groupBy('items.id', 'reviews.evaluation')
+    //             ->paginate(Item::$parPage);
+    // }
     
 }

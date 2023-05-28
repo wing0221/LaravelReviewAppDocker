@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [RootController::class, 'index'])
     ->name('root');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',  [ProfileController::class, 'show_profile'])
+        ->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // 他のユーザーのプロフィール
 Route::get('/users/{id}', [ProfileController::class, 'show_other'])

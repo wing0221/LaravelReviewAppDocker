@@ -28,9 +28,11 @@ class ItemController extends Controller
         } else {
             
             $item = Item::getLatestItemsWithFavorites();
+            // $evaluation_avg = Item::getItemEvaluationAverage();
         }
         return view('item/index', [
-            'items' => $item
+            'items' => $item,
+            // '$evaluation_avg' => $evaluation_avg
         ]);
     }
 

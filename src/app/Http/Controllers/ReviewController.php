@@ -23,7 +23,6 @@ class ReviewController extends Controller
             $reviews = Review::getReviews()
             ->paginate(10);
         }
-
         return view('review/index', [
                     'reviews' => $reviews
                 ]);

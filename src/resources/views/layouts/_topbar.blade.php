@@ -1,5 +1,6 @@
 <div class="navbar navbar-default" role="navigation">
     <div class="navbar-inner">
+        <span>　</span>
         <button type="button" class="navbar-toggle pull-left animated flip">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>

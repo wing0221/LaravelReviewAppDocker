@@ -38,13 +38,7 @@
                 <li>
                     <a class="ajax-link" href="{{ route('item.index') }}">
                         <i class="glyphicon glyphicon-heart-empty"></i>
-                        <span>おもちゃ</span>
-                    </a>
-                <li>
-                <li>
-                    <a class="ajax-link" href="#">
-                        <i class="glyphicon glyphicon-signal"></i>
-                        <span>ランキング</span>
+                        <span>おもちゃ一覧</span>
                     </a>
                 <li>
                 @auth

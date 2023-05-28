@@ -15,7 +15,7 @@
             </div>
             <div class="box-content">
             
-              <div class="row">
+              <div class="row center">
                  @if(count($LoggedInUserFavoriteItems) == 0)
                    <div class="alert alert-success box col-md-8">
                                 {{ "お気に入りのおもちゃはありません。" }}

@@ -26,6 +26,7 @@ class Review extends Model
                 'reviews.title',
                 'reviews.user_id',
                 'reviews.content',
+                'items.image',
                 'reviews.evaluation',
                 'reviews.created_at',
                 'items.name as item_name',

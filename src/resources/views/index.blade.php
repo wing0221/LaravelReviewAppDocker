@@ -15,9 +15,10 @@
                     </div>
                     <div class="box-content">
                         <div class="row">
-                        <h3 class="box col-md-12">
-                            
-                        </h3>
+                        <h4 class="box col-md-12">
+                            トイズネットはおもちゃを購入した皆様からの情報、評価を集めたレビュー投稿サイトです。
+                            皆様のおもちゃに対する思いをぜひ投稿してください！
+                        </h4>
                         </div>
                     </div>
                 </div>

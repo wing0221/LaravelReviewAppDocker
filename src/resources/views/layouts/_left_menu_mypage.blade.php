@@ -13,12 +13,6 @@
                         <span>マイページ</span>
                     </a>
                 </li>
-                <li>
-                    <a href="＃">
-                        <i class="glyphicon glyphicon-list-alt"></i>
-                        <span>投稿したレビュー</span>
-                    </a>
-                </li>
                 <li class="accordion">
                     <a href="#">
                         <i class="glyphicon glyphicon-star"></i>

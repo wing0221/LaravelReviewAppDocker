@@ -10,7 +10,7 @@
       <div class="row">
         <div class="box col-md-12">
           <div class="box-inner">
-            @include('item/_content')           
+             @include('item/_content')           
           </div>
         </div>
       </div>
@@ -20,11 +20,8 @@
                 <div class="box-header well" data-original-title="">
                     <h2>{{ $item->name }}のレビュー一覧</h2>
                 </div>
-                <div class="box-content row">
-                    <!-- content start -->
-                  <div class="box col-md-12">
-                      <div class="container">
-                          <div class="row">
+                    <div class="box-content">
+                        <div class="row">
                             @if(count($ItemReviews) == 0)
                             <div class="alert alert-success box col-md-8">
                               {{ "このアイテムへのレビューはまだありません。" }}
@@ -44,7 +41,6 @@
                                         ])
                             @endforeach
                           </div>
-                      </div>
                       <div class="container">
                           <div class="row center">
                             <a class="btn btn-success" href="{{ route('review.create_item_id',$item->id) }}">

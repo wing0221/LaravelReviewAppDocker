@@ -14,7 +14,7 @@
                     <!-- タイトル -->
                     <div class="box-header well" data-original-title="">
                         <h2>アイテム一覧</h2>
-                        {{-- <div><a href="/item/create" class="btn btn-default">新規作成</a></div> --}}
+                        {{-- {{ dd($evaluation_avg) }} --}}
                     </div>
                     <!-- コンテンツ -->
                     <div class="box-content">

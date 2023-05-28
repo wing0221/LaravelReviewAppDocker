@@ -17,6 +17,17 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+    public function show_profile()
+    {
+        $id = auth()->id();
+        $userData = User::find($id);
+        $userReviews = Review::getUserReviews($id);
+
+        return view('/dashboard',[
+            'user_data' => $userData,
+            'user_reviews' => $userReviews
+        ]);
+    }
     public function show_other($id)
     {
         $intId = (int)$id;
