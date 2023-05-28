@@ -18,46 +18,26 @@
                 </div>
                 <div class="box-content">
                     <div class="row">
-                        @foreach($reviews as $review)
-                        @include('layouts/_reviewcard', 
-                                    [
-                                        'isNew' => true,
-                                        'title' => $review->title,
-                                        'item_name'=> $review->item_name,
-                                        'evaluation'=> $review->evaluation,
-                                        'content'=> $review->content,
-                                        'user_id' => $review->user_id,
-                                        'user_name' => $review->user_name,
-                                        'created_at' => $review->created_at 
-                                    ])
-                        @endforeach
+                       @if( count($reviews) == 0 )
+                            <div class="alert alert-success">
+                                {{ "検索結果が見つかりせんでした。別のキーワードをお試しください。" }}
+                            </div>
+                        @else                        
+                            @foreach($reviews as $review)
+                            @include('layouts/_reviewcard', 
+                                        [
+                                            'isNew' => true,
+                                            'title' => $review->title,
+                                            'item_name'=> $review->item_name,
+                                            'evaluation'=> $review->evaluation,
+                                            'content'=> $review->content,
+                                            'user_id' => $review->user_id,
+                                            'user_name' => $review->user_name,
+                                            'created_at' => $review->created_at 
+                                        ])
+                            @endforeach
+                        @endif
                     </div>
-                    {{-- <table class="table table-bordered table-striped table-condensed">
-                        <thead>
-                        <tr>
-                            <th class="text-center">ID</th>
-                            <th class="text-center">ユーザー</th>
-                            <th class="text-center">レビュー品</th>
-                            <th class="text-center">評価</th>        
-                            <th class="text-center">タイトル</th>
-                            <th class="text-center">詳細</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($reviews as $review)
-                        <tr>
-                                    <td>
-                            <a href="review/{{ $review->id }}/edit">{{ $review->id }}</a>
-                            </td>
-                            <td>{{ $review->user_name }}</td>
-                            <td>{{ $review->item_name }}</td>
-                            <td>{{ $review->evaluation }}</td>
-                            <td>{{ $review->title }}</td>
-                            <td>{{ $review->content }}</td>
-                        </tr>
-                        @endforeach
-                        </tbody>
-                    </table> --}}
                     <div><div>{{ $reviews->links() }}</div></div>
                 </div>
             </div>

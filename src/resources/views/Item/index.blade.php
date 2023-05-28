@@ -39,8 +39,8 @@
                             <thead>
                             <tr>
                               <th class="text-center">ID</th>
-                              <th class="text-center">サムネイル</th>
                               <th class="text-center">名称</th>
+                              <th class="text-center">イメージ</th>
                               <th class="text-center">メーカー</th>
                               <th class="text-center">詳細</th>
                               <th class="text-center">日付</th>
@@ -51,13 +51,15 @@
                             <tbody>
                             @foreach($items as $item)
                             <tr>
+                              <td>{{ $item->id }}</td>
                               <td>
-                                <a href="/item/{{ $item->id }}">{{ $item->id }}</a>
+                                <a href="/item/{{ $item->id }}">{{ $item->name }}</a>
                               </td>
                               <td>
+                                <a href="/item/{{ $item->id }}">
                                 <img src="data:image/png;base64, {{ base64_encode($item->image) }}" width="64" height="64" class="item_img">
+                                </a>
                               </td>
-                              <td>{{ $item->name }}</td>
                               <td>{{ $item->maker }}</td>
                               <td>{{ $item->content }}</td>
                               <td>{{ $item->created_at }}</td>

@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
 
 class Review extends Model
 {
@@ -32,12 +34,27 @@ class Review extends Model
             ->orderBy('reviews.created_at', 'desc');        
     }
 
+    public static function getReview($id): Collection
+    {
+        return Review::getReviews()
+            ->where('reviews.id', '=', $id)
+            ->get();
+    }
+
     public static function getUserReviews($id): Collection
     {
         return Review::getReviews()
             ->where('reviews.user_id', '=', $id)
             ->get();
     }
+    
+    public static function getItemReviews($id): Collection
+    {
+        return Review::getReviews()
+            ->where('reviews.item_id', '=', $id)
+            ->get();
+    }
+
 
     public static function getLatestThreeReviews(): Collection
     {
@@ -46,12 +63,12 @@ class Review extends Model
             ->get();
     }
 
-    public static function searchReviewsByKeyword($keyword): Collection
+    public static function searchReviewsByKeyword($keyword): LengthAwarePaginator 
     {
-        //TODO キーワーど検索 
+        // dd($keyword);
         return Review::getReviews()
-            ->limit(3)
-            ->get();
+            ->where('reviews.content', 'LIKE', "%${keyword}%")
+            ->paginate(10);
     }
     
 
@@ -59,13 +76,7 @@ class Review extends Model
     {
         $review = new review();
         $review->user_id = $request->user_id;
-        // item_nameを元にitem_idを持ってくる
-        $item_id = DB::table('items')
-            ->select('items.id')
-            ->where('name', '=', $request->item_name)
-            ->get();
-
-        $review->item_id = $item_id[0]->id;
+        $review->item_id = $request->item_id;
         $review->evaluation = $request->evaluation;
         $review->title = $request->title;
         $review->content = $request->content;

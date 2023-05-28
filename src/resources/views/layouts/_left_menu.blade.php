@@ -28,17 +28,11 @@
                         <span>マイページ</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('review.create') }}">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                        <span>レビューを投稿する</span>
-                    </a>
-                </li>
                 @endguest
                 <li>
                     <a class="ajax-link" href="{{ route('review.index') }}">
                         <i class="glyphicon glyphicon-list-alt"></i>
-                        <span>レビューを見る</span>
+                        <span>新着レビュー</span>
                     </a>
                 </li>
                 <li>

@@ -61,5 +61,7 @@ Route::resource('item', ItemController::class);
 
 //reviewのルーティング
 Route::resource('review', ReviewController::class);
+Route::get('review/create/{item_id}', [ReviewController::class, 'create_item_id'])
+    ->name('review.create_item_id');
 
-require __DIR__ . '/auth.php';
+        require __DIR__ . '/auth.php';

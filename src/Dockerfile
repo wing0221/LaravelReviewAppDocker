@@ -43,7 +43,7 @@ COPY .env.production /var/www/html/.env
 COPY ./php/start.sh /var/www/html/start.sh
 RUN chmod 744 ./php/start.sh
 
-# 必ずキャッシュ用のディレクトリを作っておくこと→ Fargateの場合ずっとキャッシュが残ることになる
+# キャッシュ用のディレクトリを作成
 RUN mkdir -p storage/framework/cache/data
 
 # フレームワークに必要なモジュールをDockerImageにインストール

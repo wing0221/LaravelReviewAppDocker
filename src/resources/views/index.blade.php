@@ -16,8 +16,7 @@
                     <div class="box-content">
                         <div class="row">
                         <h3 class="box col-md-12">
-                            品質と信頼性に拘り、あなたの最高の選択をサポートします。
-                            素晴らしい商品体験のために、一緒に探求しましょう。
+                            
                         </h3>
                         </div>
                     </div>

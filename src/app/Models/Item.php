@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ItemRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
+// use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -39,6 +40,14 @@ class Item extends Model
             ->paginate(Item::$parPage);
     }
 
+    public static function getItemNameAll(): Collection
+    {
+        return  DB::table('items')
+                    ->select('items.id',
+                             'items.name')
+                    ->get();
+    }
+    
     public static function WhereNameOrContent(Request $request)
     {
         // 検索キーワード

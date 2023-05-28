@@ -18,12 +18,11 @@
                     <input type="hidden" class="form-control" name="user_id" value="{{ auth()->user()->id }}">
                 </div>
                 <div class="form-group">
-                    <label for="item-id">レビュー品</label>
-                    <select class="form-control"  name="item_name">
-                        @foreach ($item_names as $item_name)
-                            <option>{{ $item_name->name }}</option>
-                        @endforeach
-                    </select>
+                    <input type="hidden" class="form-control" name="item_id" value="{{ $item->id }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="item-name">レビューをするアイテム</label>
+                    <input type="text" class="form-control" name="item_name" value="{{ $item->name }}" disabled>
                 </div>
                 {{-- TODO 五つ星を押して入力するやつにする --}}
                 <div class="form-group">
@@ -42,7 +41,6 @@
                 </div>
                 <div class="form-group">
                     <label for="content">詳細</label>
-                    {{-- <input type="textarea" class="form-control" name="content" value="{{ $review->content }}"> --}}
                     <textarea rows="10" type="textarea" class="form-control" name="content" value="{{ $review->content }}"></textarea>
                 </div>
                 <button type="submit" class="btn btn-default">登録</button>

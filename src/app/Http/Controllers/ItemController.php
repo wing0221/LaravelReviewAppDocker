@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Review;
 use App\Models\DB;
 use App\Http\Requests\ItemRequest;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +21,7 @@ class ItemController extends Controller
      */
     public function index(Request $request):view
     {
-        // dd($request->input('keyword'));
+
         if(null !== $request->input('keyword'))
         {
             $item = Item::WhereNameOrContent($request);
@@ -58,10 +59,14 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-            // DBよりURIパラメータと同じIDを持つItemの情報を取得
+        // DBよりURIパラメータと同じIDを持つItemの情報を取得
         $item = Item::findOrFail($id);
-        // 取得した値をビュー「book/edit」に渡す
-        return view('item/show', ['item' => $item]);    
+        $itemReviews = Review::getItemReviews($id);
+        // 投稿フォームに渡すインスタンス
+        return view('item/show', 
+                    ['item' => $item,
+                     'ItemReviews' => $itemReviews,
+                    ]);    
     }
 
     /**
