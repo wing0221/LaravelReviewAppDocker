@@ -18,7 +18,7 @@
                     <div class="box col-md-8">
                         <div class="container">
                             <div class="row">
-                                <div>{{ $user_data }}</div>
+                                <div>このユーザーの紹介文はありません。</div>
                             </div>
                         </div>
                         <!-- content end -->
