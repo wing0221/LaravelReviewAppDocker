@@ -59,7 +59,7 @@
                                         [
                                             'isNew' => true,
                                             'name' => $latestThreeItem->name,
-                                            'item_id' => $latestThreeItem->item_id,
+                                            'item_id' => $latestThreeItem->id,
                                             'image' => $latestThreeItem->image,
                                             'created_at' => $latestThreeItem->created_at
                                         ])  

@@ -5,10 +5,6 @@
     <div class="row mt-5">
         <BR>
         <div class="col-md-8 col-md-offset-1">
-            {{-- <div class="form-group">
-                <label for="maker">メーカー</label>
-                <div>{{ $review->title  }}</div>
-            </div> --}}
             <div class="form-group">
                 <label>サムネイル</label>
             </div>

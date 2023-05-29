@@ -1,7 +1,3 @@
-{{-- @extends('review/_layout')
-@section('content')
-@include('review/_form', ['target' => 'store'])
-@endsection --}}
 @include('layouts/_HTML',['start' => true])
 @include('layouts/_HEAD',['page_title' => 'レビュー一覧'])
 <body>

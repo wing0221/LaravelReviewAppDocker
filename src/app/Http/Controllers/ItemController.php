@@ -24,15 +24,15 @@ class ItemController extends Controller
 
         if(null !== $request->input('keyword'))
         {
-            $item = Item::WhereNameOrContent($request);
-        } else {
-            
-            $item = Item::getLatestItemsWithFavorites();
-            // $evaluation_avg = Item::getItemEvaluationAverage();
+            $item = Item::WhereNameOrContent($request->input('keyword'));
+        } elseif(null !== $request->input('sort')) {
+            $item = Item::getOrderChangeItems($request->input('sort'));
+        } else{
+            $item = Item::getOrderChangeItems();
         }
         return view('item/index', [
             'items' => $item,
-            // '$evaluation_avg' => $evaluation_avg
+            // 'evaluation_avg' => evaluation_avg
         ]);
     }
 
@@ -62,11 +62,12 @@ class ItemController extends Controller
     public function show($id)
     {
         // DBよりURIパラメータと同じIDを持つItemの情報を取得
-        $item = Item::findOrFail($id);
+        $item = Item::getItemWithFavoritesAndEvaluationAverage($id);
+        // $item = Item::findOrFail($id);
         $itemReviews = Review::getItemReviews($id);
         // 投稿フォームに渡すインスタンス
         return view('item/show', 
-                    ['item' => $item,
+                    ['item' => $item[0],
                      'ItemReviews' => $itemReviews,
                     ]);    
     }

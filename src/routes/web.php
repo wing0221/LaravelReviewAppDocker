@@ -22,6 +22,12 @@ Route::get('/dashboard',  [ProfileController::class, 'show_profile'])
 // 他のユーザーのプロフィール
 Route::get('/users/{id}', [ProfileController::class, 'show_other'])
     ->name('profile.show_other');
+//Itemのルーティング
+Route::resource('item', ItemController::class);
+
+//reviewのルーティング
+Route::resource('review', ReviewController::class)
+               ->only(['index', 'show']);
 
 //ログイン時のみのルーティング
 Route::middleware('auth')->group(function () {
@@ -33,6 +39,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 
+    // review
+    Route::resource('review', ReviewController::class)
+               ->only(['store']);
+    Route::get('review/create/{item_id}', [ReviewController::class, 'create_item_id'])
+        ->name('review.create_item_id');
     // favorite_items
     Route::get(
         '/favorite-items',
@@ -58,12 +69,4 @@ Route::middleware('auth')->group(function () {
     ->only(['store', 'destroy']);
 });
 
-//Itemのルーティング
-Route::resource('item', ItemController::class);
-
-//reviewのルーティング
-Route::resource('review', ReviewController::class);
-Route::get('review/create/{item_id}', [ReviewController::class, 'create_item_id'])
-    ->name('review.create_item_id');
-
-        require __DIR__ . '/auth.php';
+require __DIR__ . '/auth.php';

@@ -12,9 +12,9 @@
             </h2>
         </div>
         <div class="box-content">
-            <div class="text-left">{{ $item_id }}</div>
-            {{-- <div class="text-left">{{ $image }}</div> --}}
-            <img src="data:image/png;base64, {{ base64_encode($image) }}" width="150" class="item_img">
+            <a href="/item/{{ $item_id }}">
+                <img src="data:image/png;base64, {{ base64_encode($image) }}" width="150" class="item_img">
+            </a>
             <span>　</span>
             <h6 class="text-right">{{ $created_at }}</h6>
         </div>

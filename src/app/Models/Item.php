@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\boolean;
+use App\Models\Integer;
 use Illuminate\Http\Request;
 use App\Http\Requests\ItemRequest;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -16,7 +18,42 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 class Item extends Model
 {
     protected static $parPage = 10;
+    
+    public static function getItemWithFavoritesAndEvaluationAverage($id) : Collection
+    {
+        return Item::getItemsWithFavoritesAndEvaluationAverage()
+            ->where('items.id', $id)
+            ->get();
+        
+    }
 
+    public static function getItemsWithFavoritesAndEvaluationAverage() : Builder
+    {
+        $userId = auth()->id();
+        return DB::table('items')
+                ->leftjoin('reviews', 'items.id', '=', 'reviews.item_id')
+                ->leftJoin('favorite_items', function ($join) use ($userId) {
+                            $join->on('items.id', '=', 'favorite_items.item_id')
+                                ->where('favorite_items.user_id', $userId);
+                            })
+                ->select('items.id',
+                         'items.name',
+                         'items.image',
+                         'items.maker',
+                         'items.content',
+                         'items.created_at', 
+                         DB::raw('IF(AVG(reviews.evaluation) IS NULL, "0",AVG(reviews.evaluation)) as average_evaluation'),
+                         DB::raw("IF(favorite_items.created_at IS NULL, FALSE, TRUE) as is_favorite")
+                         )
+                ->groupBy('items.id',
+                          'items.name',
+                          'items.image',
+                          'items.maker',
+                          'items.content',
+                          'items.created_at', 
+                          'is_favorite'
+                        );
+    }
     // use HasFactory;
     public static function getLatestItems(): LengthAwarePaginator
     {
@@ -24,6 +61,7 @@ class Item extends Model
             ->select('items.*')
             ->paginate(Item::getpage());
     }
+    
     public static function getLatestItemsWithFavorites(): LengthAwarePaginator
     {
         $userId = auth()->id();
@@ -85,16 +123,6 @@ class Item extends Model
                    ->get();
     }
 
-    public static function destroyItem($id):bool
-    {
-        try {
-            $item = Item::findOrFail($id);
-            return true;
-        } catch (ModelNotFoundException $e) {
-            return false;
-        }
-    }
-
     public static function getLoggedInUserFavoriteItems(): LengthAwarePaginator
     {
         $userId = auth()->id();
@@ -104,14 +132,29 @@ class Item extends Model
                 ->select('items.*')
                 ->paginate(Item::$parPage);
     }
-    // public static function getItemEvaluationAverage(): LengthAwarePaginator
-    // {
-    //     $userId = auth()->id();z
-    //     return Item::latest()
-    //             ->join('reviews', 'reviews.item_id', '=', 'items.id')
-    //             ->select('items.id','reviews.evaluation','items.created_at')
-    //             ->groupBy('items.id', 'reviews.evaluation')
-    //             ->paginate(Item::$parPage);
-    // }
+    public static function getOrderChangeItems(String $order = "2"): LengthAwarePaginator
+    {
+        $OrderChangedItems = Item::getItemsWithFavoritesAndEvaluationAverage();
+        if($order == "1"){
+            $OrderChangedItems = $OrderChangedItems
+                ->orderBy('items.created_at', 'desc')
+                ->paginate(Item::$parPage);
+        }elseif($order  == "2"){
+            $OrderChangedItems = $OrderChangedItems
+                ->orderBy('average_evaluation', 'desc')
+                ->paginate(Item::$parPage);
+        }
+
+        return $OrderChangedItems;
+    }
     
+    public static function destroyItem($id):bool
+    {
+        try {
+            $item = Item::findOrFail($id);
+            return true;
+        } catch (ModelNotFoundException $e) {
+            return false;
+        }
+    }
 }

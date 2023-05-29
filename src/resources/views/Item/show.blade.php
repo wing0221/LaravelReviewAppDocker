@@ -20,8 +20,8 @@
                 <div class="box-header well" data-original-title="">
                     <h2>{{ $item->name }}のレビュー一覧</h2>
                 </div>
-                    <div class="box-content">
-                        <div class="row">
+                    <div class="box-content ">
+                        <div class="row center" >
                             @if(count($ItemReviews) == 0)
                             <div class="alert alert-success box col-md-8">
                               {{ "このアイテムへのレビューはまだありません。" }}
