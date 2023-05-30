@@ -11,7 +11,6 @@ use App\Http\Requests\ItemRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-// use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class ItemController extends Controller
@@ -30,9 +29,8 @@ class ItemController extends Controller
         } else{
             $item = Item::getOrderChangeItems();
         }
-        return view('item/index', [
+        return view('review/item_index', [
             'items' => $item,
-            // 'evaluation_avg' => evaluation_avg
         ]);
     }
 
@@ -42,7 +40,7 @@ class ItemController extends Controller
     public function create():view
     {
         $item = new Item();
-        return view('item/create',[
+        return view('review/item_create',[
             'item' => $item
         ]);
     }
@@ -61,15 +59,12 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        // DBよりURIパラメータと同じIDを持つItemの情報を取得
         $item = Item::getItemWithFavoritesAndEvaluationAverage($id);
-        // $item = Item::findOrFail($id);
         $itemReviews = Review::getItemReviews($id);
-        // 投稿フォームに渡すインスタンス
-        return view('item/show', 
+        return view('review/item_show', 
                     ['item' => $item[0],
                      'ItemReviews' => $itemReviews,
-                    ]);    
+                    ]);   
     }
 
     /**
@@ -77,10 +72,8 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        // DBよりURIパラメータと同じIDを持つItemの情報を取得
         $item = Item::findOrFail($id);
-        // 取得した値をビュー「book/edit」に渡す
-        return view('item/edit', ['item' => $item]);
+        return view('review/item_edit', ['item' => $item]);
     }
 
     /**

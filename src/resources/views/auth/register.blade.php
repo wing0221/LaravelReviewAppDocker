@@ -23,19 +23,19 @@
                     <!-- Name -->
                     <div class="input-group input-group-lg">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user red"></i></span>
-                        <x-text-input id="name" class="form-control" placeholder="Name" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                        <x-text-input id="name" class="form-control" placeholder="ユーザー名" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                     <div class="clearfix"></div><br>
                     <div class="input-group input-group-lg">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope red"></i></span>
-                        <x-text-input id="email" class="form-control" placeholder="E-mail" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                        <x-text-input id="email" class="form-control" placeholder="Eメール" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                     <div class="clearfix"></div><br>
                     <div class="input-group input-group-lg">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
-                        <x-text-input id="password" class="form-control" placeholder="Password"
+                        <x-text-input id="password" class="form-control" placeholder="パスワード"
                                         type="password"
                                         name="password"
                                         required autocomplete="current-password" />
@@ -45,7 +45,7 @@
                     <!-- Confirm Password -->
                     <div class="input-group input-group-lg">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
-                        <x-text-input id="password_confirmation" class="form-control" placeholder="Password-Confirmation"
+                        <x-text-input id="password_confirmation" class="form-control" placeholder="パスワード確認"
                                         type="password"
                                         name="password_confirmation" required autocomplete="new-password" />
 
@@ -54,7 +54,7 @@
                     <div class="clearfix"></div><br>
                     <p class="center col-md-5">
                          <button type="submit" class="btn btn-primary">
-                            {{ __('Register') }}
+                            {{ __('ユーザー登録') }}
                         </button>
                     </p>
             </fieldset>

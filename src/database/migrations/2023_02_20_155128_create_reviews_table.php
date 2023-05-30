@@ -20,7 +20,7 @@ return new class extends Migration
             //itemsテーブルとの外部キー制約
             $table->foreignId('item_id')->constrained('items');
             $table->string('title');
-            $table->string('content');
+            $table->string('content', 1024);
             $table->string('evaluation');
             $table->timestamps();
         });

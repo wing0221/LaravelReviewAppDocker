@@ -48,7 +48,6 @@ class ReviewController extends Controller
     public function show(string $id)
     {
         $review = Review::getReview($id);
-        //  dd($review);
         return view('review/show', [
             'review' => $review[0]
         ]);   

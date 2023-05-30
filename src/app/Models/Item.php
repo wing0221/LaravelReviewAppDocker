@@ -85,22 +85,10 @@ class Item extends Model
                     ->get();
     }
     
-    public static function WhereNameOrContent(Request $request)
+    public static function WhereNameOrContent(String $search)
     {
-        // 検索キーワード
-        $search = $request->input('keyword');
-
-        $userId = auth()->id();
-        return DB::table('items')
-            ->where('content', 'LIKE', "%${search}%")
-            ->leftJoin('favorite_items', function ($join) use ($userId) {
-                $join->on('items.id', '=', 'favorite_items.item_id')
-                    ->where('favorite_items.user_id', $userId);
-            })//お気に入り登録情報を結合
-            ->select('items.*', 
-                    DB::raw("IF(favorite_items.created_at IS NULL, FALSE, TRUE) 
-                             as is_favorite"
-                           ))//お気に入り登録をしているか否かのフラグをつける
+        return Item::getItemsWithFavoritesAndEvaluationAverage()
+            ->where('items.content', 'LIKE', "%${search}%")
             ->paginate(Item::$parPage);
     }
 

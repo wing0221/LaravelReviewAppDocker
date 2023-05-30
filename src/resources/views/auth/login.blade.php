@@ -23,14 +23,14 @@
                     {{-- E-mail --}}
                     <div class="input-group input-group-lg">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope red"></i></span>
-                        <x-text-input id="email" class="form-control" placeholder="E-mail" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                        <x-text-input id="email" class="form-control" placeholder="メールアドレス" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                     </div>
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     <div class="clearfix"></div><br>
                     {{-- Password --}}
                     <div class="input-group input-group-lg">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
-                        <x-text-input id="password" class="form-control" placeholder="Password"
+                        <x-text-input id="password" class="form-control" placeholder="パスワード"
                                         type="password"
                                         name="password"
                                         required autocomplete="current-password" />

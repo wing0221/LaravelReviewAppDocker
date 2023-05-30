@@ -18,7 +18,7 @@ class ItemRequest extends FormRequest
         return [
             'name' => 'required|string|max:128',
             'maker' => 'required|string|max:50',
-            'content' => 'required|string|max:512',
+            'content' => 'required|string|max:255',
         ];
     }
 }

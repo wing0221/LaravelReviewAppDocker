@@ -1,5 +1,3 @@
-
-
 @include('layouts/_HTML',['start' => true])
 @include('layouts/_HEAD',['page_title' => 'レビュー一覧'])
 <body>
@@ -26,7 +24,7 @@
                             @foreach($reviews as $review)
                             @include('layouts/_reviewcard', 
                                         [
-                                            'isNew' => true,
+                                            'isNew' => false,
                                             'title' => $review->title,
                                             'item_name'=> $review->item_name,
                                             'evaluation'=> $review->evaluation,
