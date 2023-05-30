@@ -23,7 +23,7 @@
 ②バックエンド<br>
 　・PHP(Laravel)<br>
 <br>
-③データベース<br>
+③データベース<br>　
 　・MySQL<br>
 <br>
 ④インフラ<br>
