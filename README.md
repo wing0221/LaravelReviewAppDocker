@@ -29,12 +29,12 @@
 ④インフラ<br>
 　・Docker<br>
 　・AWS(ECR,ECS,Fargate)<br>
- 
-■メモ(機能追加予定)
-　　・ADMIN画面
- ・非同期通信
- ・ランキング
- ・検索条件の同時指定
- ・Route５３、ALB
- ・
+ <br>
+■メモ(機能追加予定)<br>
+　　・ADMIN画面<br>
+ ・非同期通信<br>
+ ・ランキング<br>
+ ・検索条件の同時指定<br>
+ ・Route５３、ALB<br>
+ ・<br>
   
