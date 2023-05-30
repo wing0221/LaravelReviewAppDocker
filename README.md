@@ -30,9 +30,11 @@
 　・Docker<br>
 　・AWS(ECR,ECS,Fargate)<br>
  
-
-  
-  
-  
-  
+■メモ(機能追加予定)
+　　・ADMIN画面
+ ・非同期通信
+ ・ランキング
+ ・検索条件の同時指定
+ ・Route５３、ALB
+ ・
   
