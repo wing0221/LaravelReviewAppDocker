@@ -1,5 +1,5 @@
 @include('layouts/_HTML',['start' => true])
-@include('layouts/_HEAD',['page_title' => 'レビュー一覧'])
+@include('layouts/_HEAD',['page_title' => 'アイテムの新規追加'])
 <body>
 @include('layouts/_topbar')
 <div class="ch-container">
@@ -11,7 +11,7 @@
         <div class="box col-md-12">
           <div class="box-inner">
             <div class="box-header well" data-original-title="">
-              <h2>新着レビュー</h2>
+              <h2>アイテムの新規追加</h2>
             </div>
             <div class="box-content">
               @include('review/_item_form', ['target' => 'store'])   

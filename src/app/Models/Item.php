@@ -131,6 +131,10 @@ class Item extends Model
             $OrderChangedItems = $OrderChangedItems
                 ->orderBy('average_evaluation', 'desc')
                 ->paginate(Item::$parPage);
+        }elseif($order  == "3"){
+            $OrderChangedItems = $OrderChangedItems
+                ->orderBy('items.id', 'asc')
+                ->paginate(Item::$parPage);
         }
 
         return $OrderChangedItems;

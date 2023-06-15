@@ -12,10 +12,17 @@ use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
 {
+    /**
+     * レビュー一覧ページの表示
+     *
+     * 最新のレビュー全件を取得して、ビューに渡して表示する
+     * @return \Illuminate\View\View トップページのビュー
+     */
     public function index(Request $request)
     {
 
-        // レビュー一覧を取得
+        // キーワードを受け取っっていない場合は、レビュー一覧を取得
+        // キーワードを受け取った場合は、キーワードが見つかったレビューの一覧を取得
         if(null !== $request->input('keyword'))
         {
             $reviews = Review::searchReviewsByKeyword($request->input('keyword'));
