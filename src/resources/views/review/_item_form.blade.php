@@ -1,6 +1,3 @@
-<div class="box-header well" data-original-title="">
-    <h2>レビュー品登録</h2>
-</div>
 <div class="container ops-main">
     <div class="row mt-5">
         <div class="col-md-8 col-md-offset-1">
@@ -56,7 +53,7 @@
                 </script>
                 <div class="form-group">
                     <label for="content">詳細</label>
-                    <input type="text" class="form-control" name="content" value="{{ $item->content }}">
+                    <textarea rows="10" type="textarea" class="form-control" name="content" >{{ $item->content }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-default">登録</button>
                 <a href="/item">戻る</a>

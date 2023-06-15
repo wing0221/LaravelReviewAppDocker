@@ -28,11 +28,8 @@ class RootController extends Controller
     {
         // 最新のレビュー３件を取得する
         $latestThreeReviews = Review::getLatestThreeReviews();
-        // dd($latestThreeReviews);
         // 最新のアイテム３件を取得する
         $latestThreeItems = Item::getLatestThreeItems();
-        // dd($latestThreeItems);
-        // 取得したデータをビューに渡して表示する
         return view('/index', [
             'latestThreeReviews' => $latestThreeReviews,
             'latestThreeItems' => $latestThreeItems,

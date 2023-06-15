@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Item;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Mypage\FavoriteItemController;
 use App\Http\Controllers\Mypage\FavoriteReviewController;
 use App\Http\Controllers\RootController;
@@ -14,7 +15,7 @@ Route::get('/', [RootController::class, 'index'])
     ->name('root');
 
 Route::get('/dashboard',  [ProfileController::class, 'show_profile'])
-        ->middleware(['auth', 'verified'])->name('dashboard');
+    ->middleware(['auth', 'verified'])->name('dashboard');
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -27,7 +28,7 @@ Route::resource('item', ItemController::class);
 
 //reviewのルーティング
 Route::resource('review', ReviewController::class)
-               ->only(['index', 'show']);
+    ->only(['index', 'show']);
 
 //ログイン時のみのルーティング
 Route::middleware('auth')->group(function () {
@@ -39,9 +40,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 
+    // admin
+    Route::get('admin', [AdminController::class, 'index'])
+        ->name('admin.index');
     // review
     Route::resource('review', ReviewController::class)
-               ->only(['store']);
+        ->only(['store']);
     Route::get('review/create/{item_id}', [ReviewController::class, 'create_item_id'])
         ->name('review.create_item_id');
     // favorite_items
@@ -58,15 +62,15 @@ Route::middleware('auth')->group(function () {
 
     // favorite_reviews
     Route::get(
-                '/favorite-reviews',
-                 [
-                    FavoritereviewController::class, 
-                    'logged_in_user_favorite_reviews'
-                    ]
-                )
+        '/favorite-reviews',
+        [
+            FavoritereviewController::class,
+            'logged_in_user_favorite_reviews'
+        ]
+    )
         ->name('favoritereviews.logged-in-user-favorite-reviews');
     Route::resource('/favorite-reviews', FavoritereviewController::class)
-    ->only(['store', 'destroy']);
+        ->only(['store', 'destroy']);
 });
 
 require __DIR__ . '/auth.php';
