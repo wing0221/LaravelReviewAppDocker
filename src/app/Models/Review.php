@@ -17,6 +17,8 @@ class Review extends Model
 {
     use HasFactory;
 
+    // この関数はReviewsモデルの基本形として使用する。
+    // そのため本Modelでは原則この関数を呼び出すこと。   
     public static function getReviews(): Builder
     {
         return Review::latest()
@@ -56,7 +58,7 @@ class Review extends Model
             ->get();
     }
 
-
+    // 最新3件を取得
     public static function getLatestThreeReviews(): Collection
     {
         return Review::getReviews()
@@ -64,9 +66,9 @@ class Review extends Model
             ->get();
     }
 
+    // 引数keywordをreviews.contentから探す
     public static function searchReviewsByKeyword($keyword): LengthAwarePaginator 
     {
-        // dd($keyword);
         return Review::getReviews()
             ->where('reviews.content', 'LIKE', "%${keyword}%")
             ->paginate(10);
