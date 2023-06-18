@@ -18,7 +18,17 @@ class ItemRequest extends FormRequest
         return [
             'name' => 'required|string|max:128',
             'maker' => 'required|string|max:50',
+            'image' => 'required',
             'content' => 'required|string|max:255',
+        ];
+    }
+    public function attributes()
+    {
+        return [
+            'name' => 'アイテム名',
+            'maker' => 'メーカー',
+            'image' => 'サムネイル',
+            'content' => '詳細',
         ];
     }
 }

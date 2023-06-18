@@ -25,8 +25,8 @@
                 </div>
                 <div class="form-group">
                     <label for="image">サムネイル</label>
-                    <input type="file" name="image" onchange="previewImage(event)" accept="image/jpeg, image/png">
-                    <img id="preview" src="" alt="" width="64" height="64" >
+                    <input type="file" name="image" value="{{ $item->image }}" onchange="previewImage(event)" accept="image/jpeg, image/png">
+                    <img id="preview" src="{{ $item->image }}" alt="" width="64" height="64" >
                 </div>
                 <script>
                     function previewImage(event) {
@@ -47,7 +47,7 @@
                         } else {
                             // ファイルが選択されていない場合、画像を消去する
                             const preview = document.getElementById('preview');
-                            preview.src = "";
+                            preview.src = "https://review-app-packet.s3.ap-northeast-1.amazonaws.com/item_image/no_image.png";
                         }
                     }
                 </script>

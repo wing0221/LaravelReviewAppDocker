@@ -6,7 +6,8 @@ namespace App\Models;
 
 use App\Models\boolean;
 use App\Models\Integer;
-use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ItemRequest;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -92,12 +93,41 @@ class Item extends Model
             ->paginate(Item::$parPage);
     }
 
+    public static function putS3(UploadedFile $file):String
+    {
+        $path = Storage::disk('s3')->putFile('item_image', $file, 'public');
+        $image_path = Storage::disk('s3')->url($path);
+
+        return $image_path;
+        
+    }
+
+
     public static function putItem(ItemRequest $request)
     {
+        // s3へファイルをアップロードし、ファイルのフルパスを取得
         $file = $request->file('image');
-        $binaryData = file_get_contents($file->getRealPath());// ファイルのバイナリデータを取得
+        $image_path = Item::putS3($file);
+
+        // DBへ記録
         $item = new Item();
-        $item->image = $binaryData;
+        $item->image = $image_path;
+        $item->name = $request->name;
+        $item->maker = $request->maker;
+        $item->content = $request->content;
+        $item->save();
+    }    
+ 
+    public static function updateItem(ItemRequest $request,$id)
+    {
+        // s3へファイルをアップロードし、ファイルのフルパスを取得
+        $file = $request->file('image');
+        $image_path = Item::putS3($file);
+        
+        // TODO フォーム入力なしの財の処理
+        // DBへ記録
+        $item = Item::find($id);
+        $item->image = $image_path;
         $item->name = $request->name;
         $item->maker = $request->maker;
         $item->content = $request->content;
