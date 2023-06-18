@@ -13,7 +13,7 @@
         </div>
         <div class="box-content">
             <a href="/item/{{ $item_id }}">
-                <img src="data:image/png;base64, {{ base64_encode($image) }}" width="150" class="item_img">
+                <img src="{{ $image }}" width="150" class="item_img">
             </a>
             <span>　</span>
             <h6 class="text-right">{{ $created_at }}</h6>

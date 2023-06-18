@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+// use Illuminate\Support\Facades\Storage;
 use App\Models\Review;
 use App\Models\DB;
 use App\Http\Requests\ItemRequest;
@@ -35,6 +36,19 @@ class ItemController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $item = Item::getItemWithFavoritesAndEvaluationAverage($id);
+        $itemReviews = Review::getItemReviews($id);
+        return view('review/item_show', 
+                    ['item' => $item[0],
+                     'ItemReviews' => $itemReviews,
+                    ]);   
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create():view
@@ -51,20 +65,7 @@ class ItemController extends Controller
     public function store(ItemRequest $request)
     {
         Item::putItem($request);
-        return redirect('/item');       
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        $item = Item::getItemWithFavoritesAndEvaluationAverage($id);
-        $itemReviews = Review::getItemReviews($id);
-        return view('review/item_show', 
-                    ['item' => $item[0],
-                     'ItemReviews' => $itemReviews,
-                    ]);   
+        return redirect('/admin');       
     }
 
     /**
@@ -81,13 +82,8 @@ class ItemController extends Controller
      */
     public function update(ItemRequest $request,$id)
     {
-        $item = Item::findOrFail($id);
-        $item->image = $request->image;
-        $item->name = $request->name;
-        $item->maker = $request->maker;
-        $item->content = $request->content;
-        $item->save();
-        return redirect("/item");
+        Item::updateItem($request,$id);
+        return redirect("/admin");
     }
 
     /**

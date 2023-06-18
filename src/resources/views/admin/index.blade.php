@@ -64,7 +64,7 @@
                             </td>
                             <td>
                             <a href="/item/{{ $item->id }}">
-                            <img src="data:image/png;base64, {{ base64_encode($item->image) }}" width="64" height="64" class="item_img">
+                            <img src="{{ $item->image }}" width="64" height="64" class="item_img">
                             </a>
                             </td>
                             <td>
