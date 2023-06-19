@@ -88,6 +88,7 @@
                               <td class="center-block">@include('layouts/_favorite-items-button')</td>
                             </tr>
                             @endforeach
+                            @include('layouts/_favorite-items-js')
                             </tbody>
                         </table>
                         <div><div>{{ $items->links() }}</div></div>

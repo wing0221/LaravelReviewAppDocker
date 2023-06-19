@@ -56,9 +56,14 @@ Route::middleware('auth')->group(function () {
             'logged_in_user_favorite_items'
         ]
     )
-        ->name('favoriteitems.logged-in-user-favorite-items');
-    Route::resource('/favorite-items', FavoriteItemController::class)
-        ->only(['store', 'destroy']);
+    ->name('favoriteitems.logged-in-user-favorite-items');
+
+    Route::post('/favorite-items',
+                [
+                    FavoriteItemController::class,
+                    'favorite_item_switch'
+                ]
+            );
 
     // favorite_reviews
     Route::get(

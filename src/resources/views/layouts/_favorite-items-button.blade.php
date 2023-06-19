@@ -1,13 +1,19 @@
+{{-- TODO 連打時にエラーが出ないように --}}
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @if($item->is_favorite)
-<form action="{{ route('favorite-items.destroy',$item->id) }}" method="post">
-    @csrf
-    @method('DELETE')
-    <button type="submit"  class="btn btn-primary ">⭐️</button>
-</form>
+<button 
+    class="btn btn-primary toggle_favorite" 
+    type="submit" 
+    is_favorite="{{ $item->is_favorite}}" 
+    item_id="{{ $item->id }}" 
+    >⭐️
+</button>
 @else
-<form action="{{ route('favorite-items.store') }}" method="post">
-    @csrf
-    <input type="hidden" name="item_id" value="{{ $item->id }}">
-    <button type="submit" class="btn btn-primary ">☆</button>
-</form>
+<button 
+    class="btn btn-primary toggle_favorite" 
+    type="submit" 
+    is_favorite="{{ $item->is_favorite }}" 
+    item_id="{{ $item->id }}" 
+    >☆
+</button>
 @endif

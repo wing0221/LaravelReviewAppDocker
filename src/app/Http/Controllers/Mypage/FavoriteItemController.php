@@ -20,18 +20,14 @@ class FavoriteItemController extends Controller
             'LoggedInUserFavoriteItems' => FavoriteItem::getLoggedInUserFavoriteItems()
         ]);
     }
-
-    public function store(Request $request): RedirectResponse
+    public function favorite_item_switch(Request $request): String
     {
-        // dd($request);
-        FavoriteItem::storeLoggedInUserFavoriteItem($request);
-        return back();
-    }
-
-    public function destroy($id): RedirectResponse
-    {
-        // dd($id);
-        FavoriteItem::destroyLoggedInUserFavoriteItem($id);
-        return back();
+        $item_id = $request->input('item_id');
+        if($request->input('is_favorite') === "0"){
+            FavoriteItem::storeLoggedInUserFavoriteItem($item_id);
+        }elseif ($request->input('is_favorite') === "1") {
+            FavoriteItem::destroyLoggedInUserFavoriteItem($item_id);
+        }
+        return $request->input('is_favorite');
     }
 }

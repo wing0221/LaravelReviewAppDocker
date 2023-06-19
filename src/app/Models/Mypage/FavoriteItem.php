@@ -28,21 +28,21 @@ class FavoriteItem extends Model
                 ->paginate($perPage);
     }
 
-    public static function storeLoggedInUserFavoriteItem(Request $request):void
+    public static function storeLoggedInUserFavoriteItem($item_id):void
     {
         $favorite = new FavoriteItem();
         $favorite->user_id = auth()->id();
-        $favorite->item_id = $request->input('item_id');
+        $favorite->item_id = $item_id;
         $favorite->save();
     }
     
     //TODO 途中
-    public static function destroyLoggedInUserFavoriteItem($id):void
+    public static function destroyLoggedInUserFavoriteItem($item_id):void
     {
         $user_id = auth()->id();
         FavoriteItem::where([
                         ['user_id', $user_id],
-                        ['item_id', $id],
+                        ['item_id', $item_id],
                     ])->delete();
     }
 }
