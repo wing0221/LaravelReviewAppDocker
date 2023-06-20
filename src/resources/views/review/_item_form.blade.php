@@ -7,9 +7,9 @@
 
             {{-- $targetの中身でリクエストを変える --}}
             @if($target == 'store')
-            <form action="/item" method="post" enctype="multipart/form-data">
+            <form action="/admin" method="post" enctype="multipart/form-data">
             @elseif($target == 'update')
-            <form action="/item/{{ $item->id }}" method="post" enctype="multipart/form-data">
+            <form action="/admin/{{ $item->id }}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_method" value="PUT">
             @endif
             {{-- TODO 確認画面を追加 --}}
@@ -56,7 +56,7 @@
                     <textarea rows="10" type="textarea" class="form-control" name="content" >{{ $item->content }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-default">登録</button>
-                <a href="/item">戻る</a>
+                <a href="/admin">戻る</a>
             </form>
             <div>　</div>
         </div>

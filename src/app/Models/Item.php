@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Models\boolean;
 use App\Models\Integer;
+use App\Models\Review;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ItemRequest;
@@ -173,7 +174,12 @@ class Item extends Model
     public static function destroyItem($id):bool
     {
         try {
-            $item = Item::findOrFail($id);
+            DB::beginTransaction();
+            
+            Review::where('item_id', $id)->delete();
+            Item::findOrFail($id)->delete();
+
+            DB::commit();
             return true;
         } catch (ModelNotFoundException $e) {
             return false;

@@ -17,7 +17,9 @@
                 <div class="box-content">
                     <div class="row">
                         <div class="col-md-8">
-                            <a href="/item/create">新規作成</a>
+                            <a href="/admin/create">
+                                <button class="btn btn-primary">新規作成</button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -60,10 +62,10 @@
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>
-                            <a href="/item/{{ $item->id }}/edit">{{ $item->name }}</a>
+                            <a href="/admin/{{ $item->id }}/edit">{{ $item->name }}</a>
                             </td>
                             <td>
-                            <a href="/item/{{ $item->id }}">
+                            <a href="/admin/{{ $item->id }}">
                             <img src="{{ $item->image }}" width="64" height="64" class="item_img">
                             </a>
                             </td>
@@ -73,7 +75,15 @@
                             </td>
                             <td>{{ $item->maker }}</td>
                             <td>{{ $item->created_at }}</td>
-                            <td>削除</td>
+                            <td class="center-block">
+                                <form action="{{ route('admin.destroy',['admin' => $item->id]) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？")'>
+                                        <i class="glyphicon glyphicon-trash icon-white"></i> 削除
+                                     </button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                         </tbody>

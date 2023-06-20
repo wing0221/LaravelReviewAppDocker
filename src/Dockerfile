@@ -1,4 +1,5 @@
-FROM php:8.1-apache
+FROM --platform=amd64 php:8.1-apache
+
 
 # PHPのモジュールなどをインストール
 RUN apt-get update \

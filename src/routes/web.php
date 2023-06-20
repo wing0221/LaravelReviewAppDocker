@@ -24,7 +24,8 @@ Route::get('/dashboard',  [ProfileController::class, 'show_profile'])
 Route::get('/users/{id}', [ProfileController::class, 'show_other'])
     ->name('profile.show_other');
 //Itemのルーティング
-Route::resource('item', ItemController::class);
+Route::resource('item', ItemController::class)
+    ->only(['index', 'show']);
 
 //reviewのルーティング
 Route::resource('review', ReviewController::class)
@@ -41,8 +42,9 @@ Route::middleware('auth')->group(function () {
         ->name('profile.destroy');
 
     // admin
-    Route::get('admin', [AdminController::class, 'index'])
-        ->name('admin.index');
+    Route::resource('admin', AdminController::class)
+        ->only(['index','create','store','edit','update','destroy']);
+
     // review
     Route::resource('review', ReviewController::class)
         ->only(['store']);

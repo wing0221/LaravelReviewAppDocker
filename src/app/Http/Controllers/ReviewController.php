@@ -21,7 +21,7 @@ class ReviewController extends Controller
     public function index(Request $request)
     {
 
-        // キーワードを受け取っっていない場合は、レビュー一覧を取得
+        // キーワードを受け取っていない場合は、レビュー一覧を取得
         // キーワードを受け取った場合は、キーワードが見つかったレビューの一覧を取得
         if(null !== $request->input('keyword'))
         {
