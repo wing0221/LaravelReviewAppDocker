@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use App\Models\Item;
 use App\Models\Review;
 use App\Models\DB;
@@ -29,8 +30,11 @@ class ItemController extends Controller
         } else{
             $item = Item::getOrderChangeItems();
         }
+        $genres = Genre::getGenres();
+
         return view('review/item_index', [
             'items' => $item,
+            'genres' => $genres
         ]);
     }
 

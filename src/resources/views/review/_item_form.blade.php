@@ -61,42 +61,40 @@
                     <label for="content">詳細</label>
                     <textarea rows="10" type="textarea" id="formContent" class="form-control" name="content" >{{ $item->content }}</textarea>
                 </div>
-                {{-- <button type="submit" class="btn btn-default">登録</button> --}}
                 {{-- モーダル --}}
                 <!-- モーダルの設定 -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">送信</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">登録</button>
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
                     <div class="modal-dialog modal-dialog-scrollable">
                         <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">入力内容の確認</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">以下の内容で登録します。よろしければ登録ボタンを押してください。</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div>
-                                <p class="text-muted">アイテム名</p>
+                                <p class="text-muted">■アイテム名</p>
                                 <p class="px-2" id="modalName"></p>
                             </div>
                             <div>
-                                <p class="text-muted">メーカー</p>
+                                <p class="text-muted">■メーカー</p>
                                 <p class="px-2" id="modalMaker"></p>
                             </div>
                             <div>
-                                <p class="text-muted">サムネイル</p>
+                                <p class="text-muted">■サムネイル</p>
                                 <img id="modalImage" src="" alt="" width="64" height="64" >
                                 {{-- <p class="px-2" id="modalImage"></p> --}}
                             </div>
                             <div>
-                                <p class="text-muted">詳細</p>
+                                <p class="text-muted">■詳細</p>
                                 <p class="px-2" id="modalContent"></p>
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">登録</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                            <button type="submit" class="btn btn-default">登録</button>
-                            {{-- <button type="button" class="btn btn-primary">OK</button> --}}
                         </div><!-- /.modal-footer -->
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->

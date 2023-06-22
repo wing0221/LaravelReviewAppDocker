@@ -14,7 +14,6 @@
                     <!-- タイトル -->
                     <div class="box-header well" data-original-title="">
                         <h2>アイテム一覧</h2>
-                        {{-- {{ dd($evaluation_avg) }} --}}
                     </div>
                     <!-- コンテンツ -->
                     <div class="box-content">
@@ -44,6 +43,20 @@
                               </div>
                               <button type="submit" class="btn btn-primary">並び替え</button>
                             </form>
+                          </div>
+                          <div>　</div>
+                        </div>
+                        <!--  カテゴリープルダウン -->
+                        <div class="col-md-4">
+                          <div class="control-group">
+                          <div class="form-group">
+                            <label for="genre-id">{{ __('ジャンル') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
+                            <select class="form-control" id="genre-id" name="genre_id">
+                                @foreach ($genres as $genre)
+                                    <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                                @endforeach
+                            </select>
+                          </div>
                           </div>
                           <div>　</div>
                         </div>

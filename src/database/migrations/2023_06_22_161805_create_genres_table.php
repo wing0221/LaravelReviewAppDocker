@@ -11,17 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
-            //Itemsテーブルの定義
+        Schema::create('genres', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('maker');
-            $table->foreignId('genre_id')->constrained('users');
-            $table->string('image');
-            $table->string('content');
+            $table->string('name')->nullable();
             $table->timestamps();
-
-
         });
     }
 
@@ -30,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('genres');
     }
 };
