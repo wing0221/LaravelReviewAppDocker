@@ -18,3 +18,9 @@ Breadcrumbs::for('review', function ($trail) {
     $trail->parent('home');
     $trail->push('レビュー', route('review.index'));
 });
+
+// Home > Ranking
+Breadcrumbs::for('ranking', function ($trail) {
+    $trail->parent('home');
+    $trail->push('ランキング', route('ranking.index'));
+});

@@ -39,6 +39,16 @@ class UsersTableSeeder extends Seeder
             'email' => 'gest@example.com',
             'email_verified_at' => now(),
             'password' => Hash::make('gestgestgestgest'),
+            'authority' => 'ADMIN',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        //テストユーザーを１人作成する
+        DB::table('users')->insert([
+            'name' => 'ゲストユーザー',
+            'email' => 'gest2@example.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('gestgestgestgest'),
             'authority' => 'USER',
             'created_at' => now(),
             'updated_at' => now(),

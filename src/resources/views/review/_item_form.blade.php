@@ -24,6 +24,14 @@
                     <input type="text" class="form-control" id="formMaker" name="maker" value="{{ $item->maker }}">
                 </div>
                 <div class="form-group">
+                    <label for="genre">ジャンル</label>
+                    <select class="form-control" name="genre">
+                    @foreach ($genres as $genre)
+                        <option value="{{ $genre->id }}" id="formGenre">{{ $genre->name }}</option>
+                    @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="image">サムネイル</label>
                     <input type="file" id="formImage" name="image" value="{{ $item->image }}" onchange="previewImage(event)" accept="image/jpeg, image/png">
                     @if ($item->image === NULL)
@@ -83,6 +91,10 @@
                                 <p class="px-2" id="modalMaker"></p>
                             </div>
                             <div>
+                                <p class="text-muted">■ジャンル</p>
+                                <p class="px-2" id="modalGenre"></p>
+                            </div>
+                            <div>
                                 <p class="text-muted">■サムネイル</p>
                                 <img id="modalImage" src="" alt="" width="64" height="64" >
                                 {{-- <p class="px-2" id="modalImage"></p> --}}
@@ -105,10 +117,12 @@
                         $('#exampleModal').on('show.bs.modal', function () {
                             var name = $('#formName').val()
                             var maker = $('#formMaker').val()
+                            var genre = $('#formGenre').text()
                             var content = $('#formContent').val()
                             var modal = $(this)
                             modal.find('#modalName').text(name)
                             modal.find('#modalMaker').text(maker)
+                            modal.find('#modalGenre').text(genre)
                             modal.find('#modalContent').text(content)
                         })
                         })

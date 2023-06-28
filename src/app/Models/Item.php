@@ -34,6 +34,7 @@ class Item extends Model
         $userId = auth()->id();
         return DB::table('items')
                 ->leftjoin('reviews', 'items.id', '=', 'reviews.item_id')
+                ->leftjoin('genres', 'items.genre_id', '=', 'genres.id')
                 ->leftJoin('favorite_items', function ($join) use ($userId) {
                             $join->on('items.id', '=', 'favorite_items.item_id')
                                 ->where('favorite_items.user_id', $userId);
@@ -42,6 +43,8 @@ class Item extends Model
                          'items.name',
                          'items.image',
                          'items.maker',
+                         'items.genre_id',
+                         'genres.name as genre_name',
                          'items.content',
                          'items.created_at', 
                          DB::raw('IF(AVG(reviews.evaluation) IS NULL, "0",AVG(reviews.evaluation)) as average_evaluation'),
@@ -51,6 +54,8 @@ class Item extends Model
                           'items.name',
                           'items.image',
                           'items.maker',
+                          'items.genre_id',
+                          'genre_name',
                           'items.content',
                           'items.created_at', 
                           'is_favorite'
@@ -92,48 +97,7 @@ class Item extends Model
         return Item::getItemsWithFavoritesAndEvaluationAverage()
             ->where('items.content', 'LIKE', "%${search}%")
             ->paginate(Item::$parPage);
-    }
-
-    public static function putS3(UploadedFile $file):String
-    {
-        $path = Storage::disk('s3')->putFile('item_image', $file, 'public');
-        $image_path = Storage::disk('s3')->url($path);
-
-        return $image_path;
-        
-    }
-
-
-    public static function putItem(ItemRequest $request)
-    {
-        // s3へファイルをアップロードし、ファイルのフルパスを取得
-        $file = $request->file('image');
-        $image_path = Item::putS3($file);
-
-        // DBへ記録
-        $item = new Item();
-        $item->image = $image_path;
-        $item->name = $request->name;
-        $item->maker = $request->maker;
-        $item->content = $request->content;
-        $item->save();
-    }    
- 
-    public static function updateItem(ItemRequest $request,$id)
-    {
-        // s3へファイルをアップロードし、ファイルのフルパスを取得
-        $file = $request->file('image');
-        $image_path = Item::putS3($file);
-        
-        // TODO フォーム入力なしの財の処理
-        // DBへ記録
-        $item = Item::find($id);
-        $item->image = $image_path;
-        $item->name = $request->name;
-        $item->maker = $request->maker;
-        $item->content = $request->content;
-        $item->save();
-    }    
+    } 
     
     public static function getLatestThreeItems():Collection
     {
@@ -170,7 +134,14 @@ class Item extends Model
 
         return $OrderChangedItems;
     }
-    
+
+    public static function getWhereGenreItems(String $genre_select = "0"): LengthAwarePaginator
+    {
+        $WhereGenreItems = Item::getItemsWithFavoritesAndEvaluationAverage()
+                            ->where('items.genre_id', $genre_select)
+                            ->paginate(Item::$parPage);
+        return $WhereGenreItems;
+    }   
     public static function destroyItem($id):bool
     {
         try {
@@ -184,5 +155,50 @@ class Item extends Model
         } catch (ModelNotFoundException $e) {
             return false;
         }
+    }
+
+    // s3用
+
+    public static function putS3(UploadedFile $file):String
+    {
+        $path = Storage::disk('s3')->putFile('item_image', $file, 'public');
+        $image_path = Storage::disk('s3')->url($path);
+
+        return $image_path;
+        
+    }
+
+
+    public static function putItem(ItemRequest $request)
+    {
+        // s3へファイルをアップロードし、ファイルのフルパスを取得
+        $file = $request->file('image');
+        $image_path = Item::putS3($file);
+
+        // DBへ記録
+        $item = new Item();
+        $item->image = $image_path;
+        $item->name = $request->name;
+        $item->maker = $request->maker;
+        $item->genre_id = $request->genre;
+        $item->content = $request->content;
+        $item->save();
+    }    
+ 
+    public static function updateItem(ItemRequest $request,$id)
+    {
+        // s3へファイルをアップロードし、ファイルのフルパスを取得
+        $file = $request->file('image');
+        $image_path = Item::putS3($file);
+        
+        // TODO フォーム入力なしの財の処理
+        // DBへ記録
+        $item = Item::find($id);
+        $item->image = $image_path;
+        $item->name = $request->name;
+        $item->maker = $request->maker;
+        $item->genre_id = $request->genre;
+        $item->content = $request->content;
+        $item->save();
     }
 }

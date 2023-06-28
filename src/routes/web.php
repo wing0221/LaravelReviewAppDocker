@@ -4,6 +4,7 @@ use App\Models\Item;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Mypage\FavoriteItemController;
 use App\Http\Controllers\Mypage\FavoriteReviewController;
+use App\Http\Controllers\RankingController;
 use App\Http\Controllers\RootController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
@@ -27,7 +28,10 @@ Route::get('/users/{id}', [ProfileController::class, 'show_other'])
 Route::resource('item', ItemController::class)
     ->only(['index', 'show']);
 
-//reviewのルーティング
+Route::get('ranking', [RankingController::class, 'index'])
+    ->name('ranking.index');
+
+    //reviewのルーティング
 Route::resource('review', ReviewController::class)
     ->only(['index', 'show']);
 
@@ -43,7 +47,8 @@ Route::middleware('auth')->group(function () {
 
     // admin
     Route::resource('admin', AdminController::class)
-        ->only(['index','create','store','edit','update','destroy']);
+        ->only(['index','create','store','edit','update','destroy'])
+        ->middleware('admin');
 
     // review
     Route::resource('review', ReviewController::class)

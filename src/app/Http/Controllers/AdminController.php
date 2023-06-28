@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Genre;
 use App\Models\Item;
 use App\Models\Review;
 use App\Models\DB;
@@ -29,8 +30,10 @@ class AdminController extends Controller
     public function create():view
     {
         $item = new Item();
+        $genres = Genre::getGenres();
         return view('review/item_create',[
-            'item' => $item
+            'item' => $item,
+            'genres' => $genres
         ]);
     }
 
@@ -49,7 +52,11 @@ class AdminController extends Controller
     public function edit($id)
     {
         $item = Item::findOrFail($id);
-        return view('review/item_edit', ['item' => $item]);
+        $genres = Genre::getGenres();
+        return view('review/item_edit', [
+            'item' => $item,
+            'genres' => $genres
+        ]);
     }
 
     /**

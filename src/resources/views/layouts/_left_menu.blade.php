@@ -41,6 +41,12 @@
                         <span>おもちゃ一覧</span>
                     </a>
                 <li>
+                <li>
+                    <a class="ajax-link" href="{{ route('ranking.index') }}">
+                        <i class="glyphicon glyphicon-signal"></i>
+                        <span>ランキング</span>
+                    </a>
+                <li>
                 @auth
                 <li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>

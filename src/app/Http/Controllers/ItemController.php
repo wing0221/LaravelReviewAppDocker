@@ -27,7 +27,9 @@ class ItemController extends Controller
             $item = Item::WhereNameOrContent($request->input('keyword'));
         } elseif(null !== $request->input('sort')) {
             $item = Item::getOrderChangeItems($request->input('sort'));
-        } else{
+        } elseif(null !== $request->input('genre_select')){
+            $item = Item::getWhereGenreItems($request->input('genre_select'));
+        }else{
             $item = Item::getOrderChangeItems();
         }
         $genres = Genre::getGenres();
