@@ -13,14 +13,16 @@
                 <div class="box-inner">
                     <!-- タイトル -->
                     <div class="box-header well" data-original-title="">
-                        <h2>本日登録されたアイテムのランキング</h2>
+                        <h2>{{ $pageMonth }}に登録されたアイテムのランキング</h2>
                     </div>
                     <!-- コンテンツ -->
                     <div class="box-content">
+                    @include('ranking/_serch_form')
+
                         <table class="table table-bordered table-striped table-condensed">
                             <thead>
                             <tr>
-                              <th class="text-center">順位</th>
+                              {{-- <th class="text-center">順位</th> --}}
                               <th class="text-center">名称</th>
                               <th class="text-center">イメージ</th>
                               <th class="text-center">評価平均</th>
@@ -31,10 +33,10 @@
                             <tbody>
                             @foreach($items as $item)
                             <tr>
-                              <td>
+                              {{-- <td>
                               <img src="{{ asset('images/kkrn_icon_oukan_1.png') }}" alt="Image" width="16" height="16"　class="hidden-xs"/>
                               {{ $item->rank }}
-                              </td>                           
+                              </td>                            --}}
                               <td>
                                 <a href="/item/{{ $item->id }}">{{ $item->name }}</a>
                               </td>

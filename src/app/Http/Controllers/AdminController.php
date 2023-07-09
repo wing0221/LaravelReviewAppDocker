@@ -16,9 +16,9 @@ use Illuminate\Http\Response;
 
 class AdminController extends Controller
 {
-    public function index(): View
+    public function index(request $request): View
     {
-        $item = Item::getOrderChangeItems("3");
+        $item = Item::getCombinedSearchPaginate($request);
         return view('/admin/index', [
             'items' => $item,
         ]);

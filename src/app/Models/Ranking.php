@@ -33,6 +33,7 @@ class Ranking extends Model
         DB::table('rankings')->insert($ranking_data);
     }
 
+    // ランキングテーブルのデータ削除とデータ入力
     public static function DeleteAndInputRankings():void
     {
         DB::beginTransaction();
@@ -45,6 +46,7 @@ class Ranking extends Model
         }
     }
 
+    // ランキングデータ取得
     public static function getRankings(): Builder
     {
         return DB::table('rankings')

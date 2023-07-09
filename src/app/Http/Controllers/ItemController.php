@@ -19,24 +19,19 @@ class ItemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request):view
+    public function index(Request $request): view
     {
-
-        if(null !== $request->input('keyword'))
-        {
-            $item = Item::WhereNameOrContent($request->input('keyword'));
-        } elseif(null !== $request->input('sort')) {
-            $item = Item::getOrderChangeItems($request->input('sort'));
-        } elseif(null !== $request->input('genre_select')){
-            $item = Item::getWhereGenreItems($request->input('genre_select'));
-        }else{
-            $item = Item::getOrderChangeItems();
-        }
+        // dd($request);
+        $item = Item::getCombinedSearchPaginate($request);
+        // dd($item);
+        // $item = Item::getOrderChangeItems();
         $genres = Genre::getGenres();
+        $makers = Item::getMakers();
 
         return view('review/item_index', [
             'items' => $item,
-            'genres' => $genres
+            'genres' => $genres,
+            'makers' => $makers,
         ]);
     }
 
@@ -47,9 +42,12 @@ class ItemController extends Controller
     {
         $item = Item::getItemWithFavoritesAndEvaluationAverage($id);
         $itemReviews = Review::getItemReviews($id);
-        return view('review/item_show', 
-                    ['item' => $item[0],
-                     'ItemReviews' => $itemReviews,
-                    ]);   
+        return view(
+            'review/item_show',
+            [
+                'item' => $item[0],
+                'ItemReviews' => $itemReviews,
+            ]
+        );
     }
 }

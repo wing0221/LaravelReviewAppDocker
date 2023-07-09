@@ -22,51 +22,11 @@
                       <div class="box-center">
                         <button id="switch" class="btn btn-success">検索欄を表示</button>
                         <div id="display_switch" class="active" style="display:none">
-                          <div class="col-md-4">
-                            <div class="control-group">
-                              <label for="serach">検索</label>
-                              <form action="{{ route('item.index') }}" method="GET" class="form-inline">
-                                <div class="form-group">
-                                  <input type="text" name="keyword" placeholder="キーワードを入力" class="form-control">
-                                </div>
-                                <button type="submit" class="btn btn-primary">検索</button>
-                              </form>
-                            </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="control-group">
-                              <label for="sort">並び替え</label>
-                              <form action="{{ route('item.index') }}" method="GET" class="form-inline">
-                                <div class="form-group">
-                                  <select class="form-control" id="sort" name="sort">
-                                      <option value="1">新しい順</option>
-                                      <option value="2">評価の高い順</option>
-                                  </select>
-                                </div>
-                                <button type="submit" class="btn btn-primary">並び替え</button>
-                              </form>
-                            </div>
-                            <div>　</div>
-                          </div>
-                          <!--  ジャンル'プルダウン -->
-                          <div class="col-md-4">
-                            <div class="control-group">
-                            <div class="form-group">
-                              <label for="genre-id">{{ __('ジャンル') }}</label>
-                              <form action="{{ route('item.index') }}" method="GET" class="form-inline">
-                              <select class="form-control" id="genre-id" name="genre_select">
-                                  @foreach ($genres as $genre)
-                                      <option value="{{ $genre->id }}">{{ $genre->name }}</option>
-                                  @endforeach
-                              </select>
-                              <button type="submit" class="btn btn-primary">絞る</button>
-                              </form>
-                            </div>
-                            </div>
-                            <div>　</div>
-                          </div>
+                        @include('review/_item_serch_form')
                         </div>
+                      </div>
                         <script>
+                        //ボタン押下で要素をの表示非表示を切り替える
                         //ボタン要素を取得
                         let switchBtn = document.getElementById('switch');
                         //表示・非表示を切り替える要素を取得
@@ -91,9 +51,9 @@
                         {{-- 検索結果が見つからなかった場合はフラッシュメッセージを表示 --}}
                         @if( count($items) == 0 )
                           <div>　</div>
-                        {{-- <div class="alert alert-success">
+                        <div class="alert alert-success">
                             {{ "検索結果が見つかりせんでした。別のキーワードをお試しください。" }}
-                        </div> --}}
+                        </div>
                         @else
                         <table class="table table-bordered table-striped table-condensed">
                             <thead>
@@ -105,6 +65,7 @@
                               <th class="text-center">メーカー</th>
                               <th class="text-center">ジャンル</th>
                               <th class="text-center">日付</th>
+                              <th class="text-center">レビュー数</th>
                               <th class="text-center">お気に入り登録</th>
                             </tr>
                             </thead>
@@ -128,13 +89,14 @@
                               <td>{{ $item->maker }}</td>
                               <td>{{ $item->genre_name}}</td>
                               <td>{{ $item->created_at }}</td>
+                              <td>{{ $item->count_reviews }}</td>
                               <td class="center-block">@include('layouts/_favorite-items-button')</td>
                             </tr>
                             @endforeach
                             @include('layouts/_favorite-items-js')
                             </tbody>
                         </table>
-                        <div><div>{{ $items->links() }}</div></div>
+                        <div><div>{{ $items->appends(request()->query())->links() }}</div></div>
                     </div>
                 </div>
             </div><!--/span-->
@@ -145,3 +107,4 @@
 @include('layouts/_js_assets')
 </body>
 @include('layouts/_HTML',['start' => false])
+

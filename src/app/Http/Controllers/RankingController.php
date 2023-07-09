@@ -9,7 +9,7 @@ use App\Models\Item;
 use App\Models\Ranking;
 use App\Models\Review;
 use Illuminate\View\View;
-
+use Illuminate\Http\Request;
 /**
  * RootControllerクラス
  *
@@ -20,21 +20,23 @@ use Illuminate\View\View;
 class RankingController extends Controller
 {
     /**
-     * トップページの表示
-     *
-     * 最新のアイテム３件と最新のレビュー３件を取得して、ビューに渡して表示する
-     *
-     * @return \Illuminate\View\View トップページのビュー
+     * Display a listing of the resource.
      */
-    public function index():view
+    public function index(Request $request): view
     {
-        Ranking::DeleteAndInputRankings();
-        $ranking = Ranking::getRankings()
-                    ->paginate(10);
-        // dd($ranking);
-
+        if($request->input('month') === NULL){
+            $request->merge(['month' => '2023-07']);
+        }
+        $request->merge(['order' => '2']);
+        $item = Item::getCombinedSearchAndDateTimePaginate($request);
+        $genres = Genre::getGenres();
+        $makers = Item::getMakers();
+        $months = Item::getItemCreateMonths();
+        // dd($months);
         return view('ranking.index', [
-            'items' => $ranking,
+            'items' => $item,
+            'months' => $months,
+            'pageMonth' => date('Y年m月', strtotime($request->input('month')))
         ]);
     }
 }

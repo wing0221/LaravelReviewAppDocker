@@ -30,7 +30,7 @@ Route::resource('item', ItemController::class)
 
 Route::get('ranking', [RankingController::class, 'index'])
     ->name('ranking.index');
-
+    
     //reviewのルーティング
 Route::resource('review', ReviewController::class)
     ->only(['index', 'show']);
