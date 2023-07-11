@@ -13,7 +13,7 @@
             <div class="box-header well" data-original-title="">
               <h2>レビュー投稿をする</h2>
             </div>
-            <div class="box-content">    
+            <div class="box-content">                
                 @include('review/_form', ['target' => 'store'])
             </div>
           </div>

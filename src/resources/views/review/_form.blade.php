@@ -21,12 +21,12 @@
                     <input type="hidden" class="form-control" name="item_id" value="{{ $item->id }}" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="item-name">レビューをするアイテム</label>
+                    <label for="item-name">レビューを投稿するアイテム</label>
                     <input type="text" id="formName" class="form-control" name="item_name" value="{{ $item->name }}" disabled>
                 </div>
                 {{-- TODO 五つ星を押して入力するやつにする --}}
                 <div class="form-group">
-                <label for="evaluation">評価</label>
+                <label for="evaluation">評価<span class="badge badge-danger">必須</span></label>
                 <div>
                     <input type="radio" id="formValuation" name="evaluation" value="1"> 1
                     <input type="radio" id="formValuation" name="evaluation" value="2"> 2
@@ -36,16 +36,17 @@
                 </div>
                 </div>
                 <div class="form-group">
-                    <label for="title">タイトル</label>
+                    <label for="title">タイトル<span class="badge badge-danger">5文字必須</span></label>
                     <input type="text" id="formTitle" class="form-control" name="title" value="{{ $review->title }}">
                 </div>
                 <div class="form-group">
-                    <label for="content">詳細</label>
+                    <label for="content">詳細<span class="badge badge-danger">50文字必須</span></label>
                     <textarea rows="10" type="textarea" id="formContent" class="form-control" name="content" value="{{ $review->content }}"></textarea>
                 </div>
                 {{-- モーダル --}}
                 <!-- モーダルの設定 -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">登録</button>
+                <div class="text-danger">＊レビューは管理者の承認後、掲載されます。</div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">投稿</button>
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
                     <div class="modal-dialog modal-dialog-scrollable">
                         <div class="modal-content">

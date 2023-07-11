@@ -27,8 +27,7 @@ class ReviewController extends Controller
         {
             $reviews = Review::searchReviewsByKeyword($request->input('keyword'));
         } else {           
-            $reviews = Review::getReviews()
-            ->paginate(10);
+            $reviews = Review::getCheckedReview();
         }
         return view('review/index', [
                     'reviews' => $reviews

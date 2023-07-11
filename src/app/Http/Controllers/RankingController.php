@@ -28,11 +28,15 @@ class RankingController extends Controller
             $request->merge(['month' => '2023-07']);
         }
         $request->merge(['order' => '2']);
+        
         $item = Item::getCombinedSearchAndDateTimePaginate($request);
+        // アイテムのジャンル取得
         $genres = Genre::getGenres();
+        // アイテムのメーカー取得
         $makers = Item::getMakers();
+        // アイテムの作成月取得
         $months = Item::getItemCreateMonths();
-        // dd($months);
+
         return view('ranking.index', [
             'items' => $item,
             'months' => $months,

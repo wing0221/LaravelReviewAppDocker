@@ -2,6 +2,7 @@
 
 use App\Models\Item;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminReviewController;
 use App\Http\Controllers\Mypage\FavoriteItemController;
 use App\Http\Controllers\Mypage\FavoriteReviewController;
 use App\Http\Controllers\RankingController;
@@ -49,6 +50,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('admin', AdminController::class)
         ->only(['index','create','store','edit','update','destroy'])
         ->middleware('admin');
+
+    Route::resource('admin_review', AdminReviewController::class)
+        ->only(['index','create','store','edit','update','destroy'])
+        ->middleware('admin');
+    Route::post('admin_review', [AdminReviewController::class, 'checke_toggle'])
+        ->name('AdminReview.checke_toggle');
 
     // review
     Route::resource('review', ReviewController::class)

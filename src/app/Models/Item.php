@@ -80,7 +80,10 @@ class Item extends Model
     {
         $userId = auth()->id();
         return DB::table('items')
-            ->leftjoin('reviews', 'items.id', '=', 'reviews.item_id')
+            ->leftJoin('reviews', function ($join) {
+                    $join->on('items.id', '=', 'reviews.item_id')
+                        ->where('reviews.checked', '=', 'APPROVED');
+                })
             ->leftjoin('genres', 'items.genre_id', '=', 'genres.id')
             ->leftJoin('favorite_items', function ($join) use ($userId) {
                 $join->on('items.id', '=', 'favorite_items.item_id')

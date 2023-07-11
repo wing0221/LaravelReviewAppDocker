@@ -20,6 +20,7 @@ class ReviewsTableSeeder extends Seeder
                 'title' => "アイテム{$item_id}のレビュー",
                 'content' => "アイテム{$item_id}のレビュー文。",
                 'evaluation' => rand(1, 5),
+                'checked' => 'APPROVED',
                 'created_at' => $faker->dateTimeBetween($startDate = '-6 month', $endDate = 'now'),
                 'updated_at' => $faker->dateTimeBetween($startDate = '-6 month', $endDate = 'now'),
             ]);

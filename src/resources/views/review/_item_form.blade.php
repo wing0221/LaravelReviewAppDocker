@@ -16,15 +16,15 @@
                 <div>　</div>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" >
                 <div class="form-group">
-                    <label for="name">アイテム名</label>
+                    <label for="name">アイテム名<span class="badge badge-danger">必須</span></label>
                     <input type="text" class="form-control" id="formName" name="name" value="{{ $item->name }}">
                 </div>
                 <div class="form-group">
-                    <label for="maker">メーカー</label>
+                    <label for="maker">メーカー<span class="badge badge-danger">必須</span></label>
                     <input type="text" class="form-control" id="formMaker" name="maker" value="{{ $item->maker }}">
                 </div>
                 <div class="form-group">
-                    <label for="genre">ジャンル</label>
+                    <label for="genre">ジャンル<span class="badge badge-danger">必須</span></label>
                     <select class="form-control" name="genre">
                     @foreach ($genres as $genre)
                         <option value="{{ $genre->id }}" id="formGenre">{{ $genre->name }}</option>

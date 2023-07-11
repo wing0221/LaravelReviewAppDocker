@@ -21,10 +21,7 @@ class ItemController extends Controller
      */
     public function index(Request $request): view
     {
-        // dd($request);
         $item = Item::getCombinedSearchPaginate($request);
-        // dd($item);
-        // $item = Item::getOrderChangeItems();
         $genres = Genre::getGenres();
         $makers = Item::getMakers();
 

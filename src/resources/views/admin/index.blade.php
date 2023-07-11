@@ -4,7 +4,7 @@
 @include('layouts/_topbar')
 <div class="ch-container">
     <div class="row">
-        @include('layouts/_left_menu')
+        @include('layouts/_left_menu_admin')
         @include('layouts/_noscript')
         <div id="content" class="col-lg-10 col-sm-10">
         {{-- {{ Breadcrumbs::render('admin') }} --}}
